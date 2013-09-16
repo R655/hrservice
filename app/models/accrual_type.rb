@@ -5,7 +5,7 @@ class AccrualType < ActiveRecord::Base
   validates :name, uniqueness: true
   validates :name, length: {
       in: 2..20,
-      wrong_length: 'Необходимо 2..20 символов в названии'
+      wrong_length: 'Need 2 - 20 sy,bols in name'
   }
   validates :start_month, :months_period, numericality: {
       only_integer: true,
