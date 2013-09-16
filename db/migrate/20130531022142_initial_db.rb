@@ -166,6 +166,7 @@ class InitialDb < ActiveRecord::Migration
       t.boolean :tableman, :null => false, :default => false
 
       t.timestamps
+      
     end
 
     add_index :users, :email,                :unique => true

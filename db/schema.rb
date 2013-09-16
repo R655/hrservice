@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130531022142) do
+ActiveRecord::Schema.define(:version => 20130916154453) do
 
   create_table "accrual_types", :force => true do |t|
     t.string  "name",          :limit => 20,                :null => false
@@ -29,6 +29,11 @@ ActiveRecord::Schema.define(:version => 20130531022142) do
 
   add_index "aids", ["accrual_type_id"], :name => "aid_acctypeFK"
   add_index "aids", ["employee_id"], :name => "aid_employeesFK"
+
+  create_table "constants", :force => true do |t|
+    t.string "name",  :limit => 30, :null => false
+    t.float  "value",               :null => false
+  end
 
   create_table "dayoff_masks", :force => true do |t|
     t.boolean "monday",    :default => false, :null => false
