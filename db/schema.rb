@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20130916154453) do
     t.float  "value",               :null => false
   end
 
+  add_index "constants", ["name"], :name => "index_constants_on_name", :unique => true
+
   create_table "dayoff_masks", :force => true do |t|
     t.boolean "monday",    :default => false, :null => false
     t.boolean "tuesday",   :default => false, :null => false

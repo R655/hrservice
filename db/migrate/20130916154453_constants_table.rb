@@ -6,6 +6,7 @@ class ConstantsTable < ActiveRecord::Migration
       t.float   "value",           :null => false
     end
     
+    add_index :constants, :name, :unique => true
     # add main constants to table later
      
   end
