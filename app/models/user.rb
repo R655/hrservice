@@ -11,7 +11,17 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-
+  
+  def roles
+    ROLES.collect do |role|
+      if(send(role))
+        role
+      else
+        nil
+      end
+    end
+  end
+  
   def admin?
     admin
   end
