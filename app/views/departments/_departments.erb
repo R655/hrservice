@@ -1,0 +1,25 @@
+
+<% departments.each do |department| %>
+
+    <li class= "department" >
+
+        [Отдел] <%= department.name %>
+        <!-- <%= link_to 'Show', department %> -->
+        <% if can? :update, department %><%= link_to 'e', edit_department_path(department) %><% end %>
+        <% if can? :delete, department %><%= link_to  'x', department, method: :delete, data: { confirm: 'Are you sure?' } %><% end %>
+
+        <ul class="departments">
+            <%= render  partial: 'departments', locals: {:departments => department.departments} %>
+            <%= render  partial: 'departments/positions', locals: {:positions => department.positions} %>
+            <% if can?(:manage, :departments) %><li class = "department_new"><%= link_to '[Добавить отдел]', new_department_path(params: {department: department}) %></li><% end %>
+            <% if can?(:manage, :positions) %><li class = "position_new"><%= link_to '[Добавить должность]', new_position_path(params: {department: department}) %></li><% end %>
+            <li class = "department_new"><%= link_to '[Добавить отдел]', new_in_department_path(department) %></li>
+            <li class = "position_new"><%= link_to '[Добавить должность]', new_position_path(params: {department: department}) %></li>
+        </ul>
+
+    </li>
+
+<% end %>
+
+
+

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  employee: 
+  position: 
+  level: 
+  from_date: 
+  to_date: 
+
+two:
+  employee: 
+  position: 
+  level: 
+  from_date: 
+  to_date: 

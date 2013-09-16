@@ -1,0 +1,8 @@
+-positions.each do |position|
+  %li.position
+    [Должность]
+    =position.name
+    -if can? :update, position
+      =link_to '[e]', edit_position_path(position)
+    -if can? :delete, position
+      = link_to '[x]', position, method: :delete, data: { confirm: 'Are you sure?' }

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Employee:</b>
+
+ 
+<%= if @employees_prev_position.employee;  @employees_prev_position.employee.name end %>
+ 
+
+</p>
+
+<p>
+  <b>Position:</b>
+
+ 
+<%= if @employees_prev_position.position;  @employees_prev_position.position.name end %>
+ 
+
+</p>
+
+<p>
+  <b>Level:</b>
+
+ 
+<%= if @employees_prev_position.level;  @employees_prev_position.level.name end %>
+ 
+
+</p>
+
+<p>
+  <b>From date:</b>
+
+ 
+<%= @employees_prev_position.from_date %>
+ 
+
+</p>
+
+<p>
+  <b>To date:</b>
+
+ 
+<%= @employees_prev_position.to_date %>
+ 
+
+</p>
+
+
+<%= link_to 'Edit', edit_employees_prev_position_path(@employees_prev_position) %> |
+<%= link_to 'Back', employees_prev_positions_path %>

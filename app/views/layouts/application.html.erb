@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>HRService</title>
+
+  <%= load_netzke %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+
+<header>
+
+</header>
+<menu>
+  <%= link_to 'Отделы', departments_path %>
+  <%= link_to 'Профессии', professions_path %>
+  <%= link_to 'Должности', positions_path %>
+  <%= link_to 'Квалификация', levels_path %>
+  <%= link_to 'Сотрудники', employees_path  %>
+  <%= link_to 'Текущие должности', employees_positions_path  %>
+  <%= link_to 'История должностей', employees_prev_positions_path  %>
+</menu>
+<div id="authorize_menu" >
+  <% if user_signed_in? %>
+	Авторизован как <%= current_user.email %>
+    <%= link_to "[Выход]", destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "[Регистрация]", new_user_registration_path %>
+    <%= link_to "[Вход]", new_user_session_path %>
+  <% end %>
+</div><br>
+<div id = "columns">
+
+	<content>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+	    <%= yield %>
+	</content>
+
+</div><br>
+
+<footer>
+</footer>
+
+<div id ="up_button">
+  Вверх
+</div>
+
+</body>
+</html>

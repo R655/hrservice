@@ -1,0 +1,35 @@
+<%= form_for(@employees_current_position) do |f| %>
+  <% if @employees_current_position.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employees_current_position.errors.count, "error") %> prohibited this employees_current_position from being saved:</h2>
+
+      <ul>
+      <% @employees_current_position.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    
+	<%= f.label :employee %><br />
+	<%= f.select :employee_id, Employee.all.collect{|l| [l.name, l.id]}+[nil] %>
+    
+  </div>
+  <div class="field">
+    
+	<%= f.label :position %><br />
+	<%= f.select :position_id, Position.all.collect{|l| [l.name, l.id]}+[nil] %>
+    
+  </div>
+  <div class="field">
+    
+	<%= f.label :level %><br />
+	<%= f.select :level_id, Level.all.collect{|l| [l.name, l.id]}+[nil] %>
+    
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

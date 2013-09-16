@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+
+ 
+<%= @position.name %>
+ 
+
+</p>
+
+<p>
+  <b>Department:</b>
+
+ 
+<%= if @position.department;  @position.department.name end %>
+ 
+
+</p>
+
+<p>
+  <b>Profession:</b>
+
+ 
+<%= if @position.profession;  @position.profession.name end %>
+ 
+
+</p>
+
+
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', positions_path %>

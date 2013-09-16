@@ -1,0 +1,53 @@
+<h1>Listing employees_prev_positions</h1>
+
+<table>
+  <tr>
+    <th>Employee</th>
+    <th>Position</th>
+    <th>Level</th>
+    <th>From date</th>
+    <th>To date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @employees_prev_positions.each do |employees_prev_position| %>
+  <tr>
+    <td>
+ 
+<%= if employees_prev_position.employee;  employees_prev_position.employee.name end %>
+ 
+    </td>
+    <td>
+ 
+<%= if employees_prev_position.position;  employees_prev_position.position.name end %>
+ 
+    </td>
+    <td>
+ 
+<%= if employees_prev_position.level;  employees_prev_position.level.name end %>
+ 
+    </td>
+    <td>
+ 
+<%= employees_prev_position.from_date %>
+ 
+    </td>
+    <td>
+ 
+<%= employees_prev_position.to_date %>
+ 
+    </td>
+    <td><%= link_to 'Show', employees_prev_position %></td>
+<% if can? :update, employees_prev_position %>
+    <td><%= link_to 'Edit', edit_employees_prev_position_path(employees_prev_position) %></td>
+    <td><%= link_to 'Destroy', employees_prev_position, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Employees prev position', new_employees_prev_position_path %>

@@ -1,0 +1,47 @@
+<%= form_for(@employees_prev_position) do |f| %>
+  <% if @employees_prev_position.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@employees_prev_position.errors.count, "error") %> prohibited this employees_prev_position from being saved:</h2>
+
+      <ul>
+      <% @employees_prev_position.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    
+	<%= f.label :employee %><br />
+	<%= f.select :employee_id, Employee.all.collect{|l| [l.name, l.id]}+[nil] %>
+    
+  </div>
+  <div class="field">
+    
+	<%= f.label :position %><br />
+	<%= f.select :position_id, Position.all.collect{|l| [l.name, l.id]}+[nil] %>
+    
+  </div>
+  <div class="field">
+    
+	<%= f.label :level %><br />
+	<%= f.select :level_id, Level.all.collect{|l| [l.name, l.id]}+[nil] %>
+
+  </div>
+  <div class="field">
+    
+	<%= f.label :from_date %><br />
+	<%= f.text_field :from_date %>
+    
+  </div>
+  <div class="field">
+    
+	<%= f.label :to_date %><br />
+	<%= f.text_field :to_date %>
+    
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

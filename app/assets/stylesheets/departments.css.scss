@@ -1,0 +1,30 @@
+// Place all the styles related to the Departments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+li.department_empty
+{
+  list-style-image:url('department_li.gif');
+}
+li.department
+{
+  list-style-image:url('department_li.gif');
+}
+li.position
+{
+  list-style-image:url('position_li.gif');
+}
+
+li.position_new
+{
+  list-style-image:url('position_new_li.gif');
+}
+
+li.department_new
+{
+  list-style-image:url('department_new_li.gif');
+}
+
+
