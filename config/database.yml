@@ -30,7 +30,9 @@ test:
   database: HRService_test
   pool: 5
   username: root
-  password: 123f
+  password: 
+  host: 127.0.0.1
+  port: 3306
   socket: /var/run/mysqld/mysqld.sock
 
 production:
@@ -40,5 +42,8 @@ production:
   database: HRService_production
   pool: 5
   username: root
-  password: 123f
+  password: 
+  host: 127.0.0.1
+  port: 3306
   socket: /var/run/mysqld/mysqld.sock
+
