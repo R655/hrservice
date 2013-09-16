@@ -11,6 +11,7 @@ gem 'cancan', '1.6.10'
 gem 'haml', '4.0.3'
 gem 'netzke-core', '~>0.8.0'
 gem 'netzke-basepack', '~>0.8.0'
+gem 'i18n_generators'
 
 # Gems used only for assets and not required
 # in production environments by default.
