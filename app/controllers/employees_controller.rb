@@ -3,7 +3,14 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.all
+    @employees =
+     
+    if(params[:department_id])
+      Employee.where("department_id = ?", params[:department_id]) 
+    else if (params[:position_id])  
+      Employee.where("position_id = ?", params[:position_id])
+    else
+      Employee.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @employees }
