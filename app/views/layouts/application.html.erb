@@ -13,15 +13,7 @@
 <header>
 
 </header>
-<menu>
-  <%= link_to 'Отделы', departments_path %>
-  <%= link_to 'Профессии', professions_path %>
-  <%= link_to 'Должности', positions_path %>
-  <%= link_to 'Квалификация', levels_path %>
-  <%= link_to 'Сотрудники', employees_path  %>
-  <%= link_to 'Текущие должности', employees_positions_path  %>
-  <%= link_to 'История должностей', employees_prev_positions_path  %>
-</menu>
+
 <div id="authorize_menu" >
   <% if user_signed_in? %>
 	Авторизован как <%= current_user.email %>
@@ -31,7 +23,18 @@
     <%= link_to "[Вход]", new_user_session_path %>
   <% end %>
 </div><br>
+
 <div id = "columns">
+
+<menu>
+  <%= link_to 'Отделы', departments_path %>
+  <%= link_to 'Должности', positions_path %>
+  <%= link_to 'Сотрудники', employees_path  %>
+  <%= link_to 'Текущие должности', employees_positions_path  %>
+  <%= link_to 'История должностей', employees_prev_positions_path  %>
+</menu>
+
+
 
 	<content>
       <p class="notice"><%= notice %></p>
