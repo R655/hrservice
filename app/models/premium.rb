@@ -25,8 +25,7 @@ class Premium < ActiveRecord::Base
   )
   validates :name, uniqueness: true
   validates :name, length: {
-      in: 2..20,
-      wrong_length: 'Необходимо 2..20 символов в названии'
+      in: 2..20
   }
   validates :salary_factor, numericality: {
       in: 0..1

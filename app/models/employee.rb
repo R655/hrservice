@@ -1,5 +1,6 @@
 class Employee < ActiveRecord::Base
   has_many :employees_positions
+  has_many :premia
   has_one :dayoff_mask, dependent: :destroy, foreign_key: :id
   belongs_to :position
 

@@ -1,4 +1,10 @@
 class PositionsController < ApplicationController
+  active_scaffold :"position" do |conf|
+  end
+end
+
+class PositionsDetailsController < ApplicationController
+  
   # GET /positions
   # GET /positions.json
   def index

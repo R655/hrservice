@@ -1,5 +1,7 @@
 class AccrualType < ActiveRecord::Base
-  has_many :aids, dependent: :restrict
+  has_many :aids # , dependent: :restrict # изза депендент перестаёт работать круд
+  has_many :premia
+  
   attr_accessible :name, :start_month, :months_period
   validates :name, :start_month, :months_period, :presence => true
   validates :name, uniqueness: true

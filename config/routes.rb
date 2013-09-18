@@ -1,15 +1,18 @@
 Hrservice::Application.routes.draw do
 
-  match "/departments/new/:department_id" => "departments#new", as: :new_in_department
-  resources :employees_prev_positions
-  resources :employees_positions
-  resources :employee_crud do as_routes end
+  #match "/departments_details/new/:department_id" => "departments_details#new", as: :new_in_department
+  resources :employees_prev_positions do as_routes end
+  resources :employees_positions do as_routes end
+  resources :employees do as_routes end
   resources :dayoff_masks do as_routes end
-  resources :employees
-  resources :levels
-  resources :positions
-  resources :professions
-  resources :departments
+  resources :positions do as_routes end
+  resources :departments do as_routes end
+  resources :sick_leaves do as_routes end
+  resources :employees_prev_positions do as_routes end
+  resources :premia do as_routes end
+  resources :accrual_types do as_routes end
+  resources :aids do as_routes end
+  resources :vacations do as_routes end
   root :to => "home#index"
   devise_for :users
   get "home/index"

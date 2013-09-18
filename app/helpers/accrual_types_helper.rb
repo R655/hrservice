@@ -1,0 +1,2 @@
+module AccrualTypesHelper
+end

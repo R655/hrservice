@@ -98,7 +98,7 @@ class InitialDb < ActiveRecord::Migration
     add_index "positions", ["name"], :unique => true
     add_index "positions", ["department_id"], :name => "pos_departmentFK"
   
-    create_table "premiums", :force => true do |t|
+    create_table "premia", :force => true do |t|
       t.string  "name",            :limit => 100, :unique => true,                                :null => false
       t.integer "employee_id"
       t.integer "department_id"
@@ -109,19 +109,19 @@ class InitialDb < ActiveRecord::Migration
       t.date    "end_month"
     end
   
-    add_index "premiums", ["name"], :unique => true
-    add_index "premiums", ["accrual_type_id"], :name => "prem_acctypeFK"
-    add_index "premiums", ["department_id"], :name => "prem_depFK"
-    add_index "premiums", ["employee_id"], :name => "prem_employeesFK"
+    add_index "premia", ["name"], :unique => true
+    add_index "premia", ["accrual_type_id"], :name => "prem_acctypeFK"
+    add_index "premia", ["department_id"], :name => "prem_depFK"
+    add_index "premia", ["employee_id"], :name => "prem_employeesFK"
   
-    create_table "seek_leaves", :force => true do |t|
+    create_table "sick_leaves", :force => true do |t|
       t.integer "employee_id",                    :null => false
       t.date    "start_date",                     :null => false
       t.date    "end_date",                       :null => false
       t.float   "salary_factor", :default => 1.0, :null => false
     end
   
-    add_index "seek_leaves", ["employee_id"], :name => "seek_leaves_employee_idFK"
+    add_index "sick_leaves", ["employee_id"], :name => "sick_leaves_employee_idFK"
   
     create_table "vacations", :force => true do |t|
       t.integer "employee_id", :null => false

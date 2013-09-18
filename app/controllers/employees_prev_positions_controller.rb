@@ -1,4 +1,9 @@
 class EmployeesPrevPositionsController < ApplicationController
+    active_scaffold :"employees_prev_position" do |conf|
+  end
+end
+
+class EmployeesPrevPositionsDetailsController < ApplicationController
 
   before_filter :authenticate_user!
 

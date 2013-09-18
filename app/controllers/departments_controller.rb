@@ -1,4 +1,9 @@
 class DepartmentsController < ApplicationController
+  active_scaffold :"department" do |conf|
+  end
+end
+
+class DepartmentsDetailsController < ApplicationController
 
   #before_filter :authenticate_user!
   # GET /departments

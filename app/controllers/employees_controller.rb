@@ -1,5 +1,5 @@
- 
 
 class EmployeesController  < ApplicationController
-  active_scaffold :employee 
+  active_scaffold :"employee" do |conf|
+  end
 end

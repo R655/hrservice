@@ -1,5 +1,5 @@
 class Position < ActiveRecord::Base
-  belongs_to :department
+  belongs_to :department # если это включить то сайт не работает
 
   attr_accessible :name, :department_id, :salary
 

@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(:version => 20130916154453) do
   add_index "positions", ["department_id"], :name => "pos_departmentFK"
   add_index "positions", ["name"], :name => "index_positions_on_name", :unique => true
 
-  create_table "premiums", :force => true do |t|
+  create_table "premia", :force => true do |t|
     t.string  "name",            :limit => 100,                                                 :null => false
     t.integer "employee_id"
     t.integer "department_id"
@@ -127,19 +127,19 @@ ActiveRecord::Schema.define(:version => 20130916154453) do
     t.date    "end_month"
   end
 
-  add_index "premiums", ["accrual_type_id"], :name => "prem_acctypeFK"
-  add_index "premiums", ["department_id"], :name => "prem_depFK"
-  add_index "premiums", ["employee_id"], :name => "prem_employeesFK"
-  add_index "premiums", ["name"], :name => "index_premiums_on_name", :unique => true
+  add_index "premia", ["accrual_type_id"], :name => "prem_acctypeFK"
+  add_index "premia", ["department_id"], :name => "prem_depFK"
+  add_index "premia", ["employee_id"], :name => "prem_employeesFK"
+  add_index "premia", ["name"], :name => "index_premia_on_name", :unique => true
 
-  create_table "seek_leaves", :force => true do |t|
+  create_table "sick_leaves", :force => true do |t|
     t.integer "employee_id",                    :null => false
     t.date    "start_date",                     :null => false
     t.date    "end_date",                       :null => false
     t.float   "salary_factor", :default => 1.0, :null => false
   end
 
-  add_index "seek_leaves", ["employee_id"], :name => "seek_leaves_employee_idFK"
+  add_index "sick_leaves", ["employee_id"], :name => "sick_leaves_employee_idFK"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
