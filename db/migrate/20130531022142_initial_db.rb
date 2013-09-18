@@ -3,19 +3,22 @@ class InitialDb < ActiveRecord::Migration
   def change
     
     create_table "accrual_types", :force => true do |t|
-      t.string  "name",          :limit => 20,                :null => false
+      t.string  "name",          :limit => 20,                :null => false, :unique => true
       t.integer "start_month",                 :default => 1, :null => false
       t.integer "months_period",               :default => 1, :null => false
     end
   
+    add_index "accrual_types", ["name"], :unique => true
+  
     create_table "aids", :force => true do |t|
-      t.string  "name",            :limit => 100
+      t.string  "name",            :limit => 100, :unique => true
       t.integer "accrual_type_id",                                                                :null => false
       t.integer "employee_id",                                                                    :null => false
       t.decimal "salary_add",                     :precision => 10, :scale => 2, :default => 0.0, :null => false
       t.float   "salary_factor",                                                 :default => 0.0, :null => false
     end
   
+    add_index "aids", ["name"], :unique => true
     add_index "aids", ["accrual_type_id"], :name => "aid_acctypeFK"
     add_index "aids", ["employee_id"], :name => "aid_employeesFK"
   
@@ -30,22 +33,24 @@ class InitialDb < ActiveRecord::Migration
     end
   
     create_table "departments", :force => true do |t|
-      t.string  "name",          :limit => 20, :null => false
-      t.integer "department_id"
+      t.string  "name",          :limit => 20, :null => false, :unique => true
+      t.integer "department_id", :null => true
     end
   
+    add_index "departments", ["name"], :unique => true
     add_index "departments", ["department_id"], :name => "parent_departmentsFK"
   
     create_table "employees", :force => true do |t|
       t.string  "first_name",          :limit => 20,  :null => false
       t.string  "second_name",         :limit => 20,  :null => false
       t.string  "patronymic",          :limit => 20,  :null => false
-      t.string  "passport",            :limit => 10,  :null => false
-      t.string  "registration_adress", :limit => 100, :null => false
+      t.string  "passport",            :limit => 10,  :null => false, :unique => true
+      t.string  "registration_address", :limit => 100, :null => false
       t.date    "accepted_date",                      :null => false
       t.integer "position_id",                        :null => false
     end
-  
+    
+    add_index "employees", ["passport"], :unique => true
     add_index "employees", ["first_name", "second_name", "patronymic"], :name => "first_name", :unique => true
   
     create_table "employees_positions", :force => true do |t|
@@ -85,15 +90,16 @@ class InitialDb < ActiveRecord::Migration
     add_index "holidays", ["name"], :name => "name", :unique => true
   
     create_table "positions", :force => true do |t|
-      t.string  "name",          :limit => 20,                                :null => false
+      t.string  "name",          :limit => 20,    :unique => true,                            :null => false
       t.integer "department_id",                                              :null => false
       t.decimal "salary",                      :precision => 10, :scale => 2, :null => false
     end
-  
+    
+    add_index "positions", ["name"], :unique => true
     add_index "positions", ["department_id"], :name => "pos_departmentFK"
   
     create_table "premiums", :force => true do |t|
-      t.string  "name",            :limit => 100,                                                 :null => false
+      t.string  "name",            :limit => 100, :unique => true,                                :null => false
       t.integer "employee_id"
       t.integer "department_id"
       t.integer "accrual_type_id",                                                                :null => false
@@ -103,6 +109,7 @@ class InitialDb < ActiveRecord::Migration
       t.date    "end_month"
     end
   
+    add_index "premiums", ["name"], :unique => true
     add_index "premiums", ["accrual_type_id"], :name => "prem_acctypeFK"
     add_index "premiums", ["department_id"], :name => "prem_depFK"
     add_index "premiums", ["employee_id"], :name => "prem_employeesFK"

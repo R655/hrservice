@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(:version => 20130916154453) do
     t.integer "months_period",               :default => 1, :null => false
   end
 
+  add_index "accrual_types", ["name"], :name => "index_accrual_types_on_name", :unique => true
+
   create_table "aids", :force => true do |t|
     t.string  "name",            :limit => 100
     t.integer "accrual_type_id",                                                                :null => false
@@ -29,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20130916154453) do
 
   add_index "aids", ["accrual_type_id"], :name => "aid_acctypeFK"
   add_index "aids", ["employee_id"], :name => "aid_employeesFK"
+  add_index "aids", ["name"], :name => "index_aids_on_name", :unique => true
 
   create_table "constants", :force => true do |t|
     t.string "name",  :limit => 30, :null => false
@@ -53,18 +56,20 @@ ActiveRecord::Schema.define(:version => 20130916154453) do
   end
 
   add_index "departments", ["department_id"], :name => "parent_departmentsFK"
+  add_index "departments", ["name"], :name => "index_departments_on_name", :unique => true
 
   create_table "employees", :force => true do |t|
-    t.string  "first_name",          :limit => 20,  :null => false
-    t.string  "second_name",         :limit => 20,  :null => false
-    t.string  "patronymic",          :limit => 20,  :null => false
-    t.string  "passport",            :limit => 10,  :null => false
-    t.string  "registration_adress", :limit => 100, :null => false
-    t.date    "accepted_date",                      :null => false
-    t.integer "position_id",                        :null => false
+    t.string  "first_name",           :limit => 20,  :null => false
+    t.string  "second_name",          :limit => 20,  :null => false
+    t.string  "patronymic",           :limit => 20,  :null => false
+    t.string  "passport",             :limit => 10,  :null => false
+    t.string  "registration_address", :limit => 100, :null => false
+    t.date    "accepted_date",                       :null => false
+    t.integer "position_id",                         :null => false
   end
 
   add_index "employees", ["first_name", "second_name", "patronymic"], :name => "first_name", :unique => true
+  add_index "employees", ["passport"], :name => "index_employees_on_passport", :unique => true
 
   create_table "employees_positions", :force => true do |t|
     t.integer "employee_id",                          :null => false
@@ -109,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20130916154453) do
   end
 
   add_index "positions", ["department_id"], :name => "pos_departmentFK"
+  add_index "positions", ["name"], :name => "index_positions_on_name", :unique => true
 
   create_table "premiums", :force => true do |t|
     t.string  "name",            :limit => 100,                                                 :null => false
@@ -124,6 +130,7 @@ ActiveRecord::Schema.define(:version => 20130916154453) do
   add_index "premiums", ["accrual_type_id"], :name => "prem_acctypeFK"
   add_index "premiums", ["department_id"], :name => "prem_depFK"
   add_index "premiums", ["employee_id"], :name => "prem_employeesFK"
+  add_index "premiums", ["name"], :name => "index_premiums_on_name", :unique => true
 
   create_table "seek_leaves", :force => true do |t|
     t.integer "employee_id",                    :null => false
