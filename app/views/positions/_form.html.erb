@@ -17,18 +17,19 @@
 	<%= f.text_field :name %>
     
   </div>
+  <div class="salary">
+    
+	<%= f.label :salary %><br />
+	<%= f.text_field :salary %>
+    
+  </div>
   <div class="field">
     
 	<%= f.label :department %><br />
 	<%= f.select :department_id, Department.all.collect{|l| [l.name, l.id]}+[nil] %>
     
   </div>
-  <div class="field">
-    
-	<%= f.label :profession %><br />
-	<%= f.select :profession_id, Profession.all.collect{|l| [l.name, l.id]}+[nil] %>
-    
-  </div>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,6 +1,6 @@
 class Employee < ActiveRecord::Base
   has_many :employees_positions
-  has_one :dayoff_mask, dependent: :destroy
+  has_one :dayoff_mask, dependent: :destroy, foreign_key: :id
   belongs_to :position
 
   attr_accessible(

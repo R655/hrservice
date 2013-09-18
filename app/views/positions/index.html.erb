@@ -4,7 +4,6 @@
   <tr>
     <th>Name</th>
     <th>Department</th>
-    <th>Profession</th>
     <th></th>
     <th></th>
     <th></th>
@@ -22,11 +21,7 @@
 <%= if position.department;  position.department.name end %>
  
     </td>
-    <td>
- 
-<%= if position.profession;  position.profession.name end %>
- 
-    </td>
+
     <td><%= link_to 'Show', position %></td>
     <td><%= link_to 'Edit', edit_position_path(position) %></td>
     <td><%= link_to 'Destroy', position, method: :delete, data: { confirm: 'Are you sure?' } %></td>
