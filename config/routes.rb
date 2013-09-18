@@ -4,6 +4,7 @@ Hrservice::Application.routes.draw do
   resources :employees_prev_positions
   resources :employees_positions
   resources :employee_crud do as_routes end
+  resources :dayoff_masks do as_routes end
   resources :employees
   resources :levels
   resources :positions
