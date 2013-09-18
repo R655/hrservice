@@ -1,3 +1,5 @@
-class EmployeesController  < AuditorController
-  active_scaffold :employee
+ 
+
+class EmployeesController  < ApplicationController
+  active_scaffold :employee 
 end

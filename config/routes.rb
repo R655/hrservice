@@ -1,9 +1,8 @@
 Hrservice::Application.routes.draw do
 
+
   #match 'fewfw' => 'departments#index', as: :program_link
   #match 'posts/:year(/:month)' => 'posts#index', :constraints => { :year => /\d{4}/ }, :as => :ants
-
-  netzke
 
   match "/departments/new/:department_id" => "departments#new", as: :new_in_department
 
@@ -13,7 +12,7 @@ Hrservice::Application.routes.draw do
   resources :employees_positions
 
 
-  resources :employees
+  resources :employees do as_routes end
 
 
   resources :levels
