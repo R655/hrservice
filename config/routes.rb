@@ -1,39 +1,15 @@
 Hrservice::Application.routes.draw do
 
-
-  #match 'fewfw' => 'departments#index', as: :program_link
-  #match 'posts/:year(/:month)' => 'posts#index', :constraints => { :year => /\d{4}/ }, :as => :ants
-
   match "/departments/new/:department_id" => "departments#new", as: :new_in_department
-
   resources :employees_prev_positions
-
-
   resources :employees_positions
-
-
   resources :employees do as_routes end
-
-
   resources :levels
-
-
   resources :positions
-
-
   resources :professions
-
-
   resources :departments
-
-
-
   root :to => "home#index"
-
-
-
   devise_for :users
-
   get "home/index"
   
 
@@ -91,4 +67,9 @@ Hrservice::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+  #
+  # My examples:
+  #
+  # match 'fewfw' => 'departments#index', as: :program_link
+  # match 'posts/:year(/:month)' => 'posts#index', :constraints => { :year => /\d{4}/ }, :as => :ants
 end
