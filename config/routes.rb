@@ -3,7 +3,8 @@ Hrservice::Application.routes.draw do
   match "/departments/new/:department_id" => "departments#new", as: :new_in_department
   resources :employees_prev_positions
   resources :employees_positions
-  resources :employees do as_routes end
+  resources :employee_crud do as_routes end
+  resources :employees
   resources :levels
   resources :positions
   resources :professions
