@@ -1,6 +1,6 @@
 Hrservice::Application.routes.draw do
 
-  #match "/departments_details/new/:department_id" => "departments_details#new", as: :new_in_department
+  # match "/departments_details/new/:department_id" => "departments_details#new", as: :new_in_department
   resources :employees_prev_positions do as_routes end
   resources :employees_positions do as_routes end
   resources :employees do as_routes end
@@ -16,7 +16,7 @@ Hrservice::Application.routes.draw do
   root :to => "home#index"
   devise_for :users
   get "home/index"
-  
+  match "/users/my_sign_out" => "devise/sessions#destroy", as: :my_user_out
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

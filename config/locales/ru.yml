@@ -56,3 +56,61 @@ ru:
         subject: "Инструкции по восстановлению пароля"
       unlock_instructions:
         subject: "Инструкции по разблокировке учётной записи"
+        
+  activerecord:
+    models:
+      accrual_type: "Тип начисления"
+      aid: "Социальная помощь"
+      dayoff_mask: "Выходные"
+      department: "Отдел"
+      employee: "Сотрудник"
+      employees_position: "Должность сотрудника"
+      employees_prev_position: "Предыдущая должность сотрудника"
+      employees_visit: "Посещения"
+      holiday: "Праздник"
+      position: "Должность"
+      premium: "Премия"
+      sick_leave: "Больничный"
+      user: "Пользователь"
+      vacation: "Отпуск"
+    attributes:
+      accrual_type:
+      aid:
+      dayoff_mask:
+      department:
+        name: "Название"
+        department: "Родительский отдел"
+        departments: "Дочерние отделы"
+        positions: "Должности"
+        premia: "Назначенные отделу премии"
+      employee:
+        first_name: Имя
+        second_name: Фамилия
+        patronymic: Отчество
+        accepted_date: Дата поступления
+        registration_address: Адрес регистрации
+        dayoff_mask: Выходные
+        position: Должность
+        premia: Назначенные премии
+        passport: "Номер пасспорта"
+        employees_positions: Должности сотрудника
+      employees_position:
+        rate: "Ставка"
+        rate_pos_start_date: "Начало работы с текущей ставкой"
+        employee: "Сотрудник"
+        position: "Должность"
+      employees_prev_position:
+      employees_visit:
+      holiday:
+      position:
+        name: "Название"
+        salary: "Зарплата за месяц"
+        department: "Отдел"
+      premium:
+        name: "Описание"
+        salary_factor: "Множитель ЗП"
+        salary_add: "Добавка к ЗП с учётом множителя"
+        accrual_type: "Тип начисления"
+        employee: "Сотрудник"
+      user:
+      vacation:

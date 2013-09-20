@@ -2,14 +2,10 @@
 <html>
 <head>
   <title>HRService</title>
-
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-
-
 <header>
 
 </header>
@@ -17,11 +13,11 @@
 <div id="authorize_menu" >
   <% if user_signed_in? %>
 	Авторизован как <%= current_user.email %>
-    <%= link_to "[Выход]", destroy_user_session_path, :method => :delete %>
-  <% else %>
+    <%= link_to "[Выход]", my_user_out_path %>
+  <% end %>
     <%= link_to "[Регистрация]", new_user_registration_path %>
     <%= link_to "[Вход]", new_user_session_path %>
-  <% end %>
+  
 </div><br>
 
 <div id = "columns">
