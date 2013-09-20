@@ -13,8 +13,6 @@
             <%= render  partial: 'departments/positions', locals: {:positions => department.positions} %>
             <% if can?(:manage, :departments) %><li class = "department_new"><%= link_to '[Добавить отдел]', new_department_path(params: {department: department}) %></li><% end %>
             <% if can?(:manage, :positions) %><li class = "position_new"><%= link_to '[Добавить должность]', new_position_path(params: {department: department}) %></li><% end %>
-            <li class = "department_new"><%= link_to '[Добавить отдел]', new_in_department_path(department) %></li>
-            <li class = "position_new"><%= link_to '[Добавить должность]', new_position_path(params: {department: department}) %></li>
         </ul>
 
     </li>

@@ -6,13 +6,20 @@ Hrservice::Application.routes.draw do
   resources :employees do as_routes end
   resources :dayoff_masks do as_routes end
   resources :positions do as_routes end
-  resources :departments do as_routes end
+    
+  # departments
+  
+    get "/departments/tree" => "departments#tree", as: :departments_tree
+    get "/departments/show_details/:department_id" => "departments#show_details", as: :department_details
+    resources :departments do as_routes end
+      
   resources :sick_leaves do as_routes end
   resources :employees_prev_positions do as_routes end
   resources :premia do as_routes end
   resources :accrual_types do as_routes end
   resources :aids do as_routes end
   resources :vacations do as_routes end
+  resources :employees_visits do as_routes end
   root :to => "home#index"
   devise_for :users
   get "home/index"

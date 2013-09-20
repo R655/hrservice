@@ -90,10 +90,10 @@ ru:
         accepted_date: Дата поступления
         registration_address: Адрес регистрации
         dayoff_mask: Выходные
-        position: Должность
+        position: Основная должность
         premia: Назначенные премии
         passport: "Номер пасспорта"
-        employees_positions: Должности сотрудника
+        employees_positions: Совмещение должностей
       employees_position:
         rate: "Ставка"
         rate_pos_start_date: "Начало работы с текущей ставкой"

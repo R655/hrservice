@@ -1,6 +1,29 @@
 class DepartmentsController < ApplicationController
   active_scaffold :"department" do |conf|
   end
+  
+  # GET /departments
+  # GET /departments.json
+  def tree
+    @departments = Department.all
+
+    respond_to do |format|
+      format.html # tree.html.erb
+      format.json { render json: @departments }
+    end
+  end
+  
+  # GET /departments/1
+  # GET /departments/1.json
+  def show_details
+    @department = Department.find(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @department }
+    end
+  end
+  
 end
 
 class DepartmentsDetailsController < ApplicationController

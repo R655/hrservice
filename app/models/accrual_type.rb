@@ -1,5 +1,5 @@
 class AccrualType < ActiveRecord::Base
-  has_many :aids # , dependent: :restrict # изза депендент перестаёт работать круд
+  has_many :aids # , dependent: :restrict # FIXME изза депендент перестаёт работать круд
   has_many :premia
   
   attr_accessible :name, :start_month, :months_period

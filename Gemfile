@@ -6,11 +6,9 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2', '0.3.11'
-gem 'devise', '2.2.4'
-gem 'cancan', '1.6.10'
-gem 'haml', '4.0.3'
-gem 'netzke-core', '~>0.8.0'
-gem 'netzke-basepack', '~>0.8.0'
+gem 'devise', '~>2.2.4'
+gem 'cancan', '~>1.6.10'
+gem 'haml' # huyaml
 gem 'i18n_generators'
 gem 'active_scaffold'
 
