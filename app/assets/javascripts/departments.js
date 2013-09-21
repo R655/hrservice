@@ -10,7 +10,8 @@ function liclick(){
         $(this).find('ul:first').css({visibility: "hidden"});
     });
 }
-            /*
+            
 $(document).ready(function(){
     liclick();
-});       */
+    
+});       

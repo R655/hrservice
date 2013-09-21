@@ -9,12 +9,28 @@ Hrservice::Application.routes.draw do
     
   # departments
   
-    get "/departments/tree" => "departments#tree", as: :departments_tree
-    get "/departments/show_details/:department_id" => "departments#show_details", as: :department_details
-    resources :departments do as_routes end
+    
+    resources :departments do
+      as_routes 
+      resources :positions do
+        as_routes
+        resources :employees_positions do
+          as_routes
+          resources :employees do
+            as_routes
+          end
+        end
+      end
+      collection do
+        get 'tree'  
+      end
+      member do
+        get 'details'
+      end 
+
+    end
       
   resources :sick_leaves do as_routes end
-  resources :employees_prev_positions do as_routes end
   resources :premia do as_routes end
   resources :accrual_types do as_routes end
   resources :aids do as_routes end
