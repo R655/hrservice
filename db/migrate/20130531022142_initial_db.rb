@@ -47,7 +47,6 @@ class InitialDb < ActiveRecord::Migration
       t.string  "passport",            :limit => 10,  :null => false, :unique => true
       t.string  "registration_address", :limit => 100, :null => false
       t.date    "accepted_date",                      :null => false
-      t.integer "position_id",                        :null => false
     end
     
     add_index "employees", ["passport"], :unique => true
@@ -58,6 +57,7 @@ class InitialDb < ActiveRecord::Migration
       t.integer "position_id",                          :null => false
       t.float   "rate",                :default => 1.0, :null => false
       t.date    "rate_pos_start_date",                  :null => false
+      t.boolean "is_main", :default => true, :null => false
     end
   
     add_index "employees_positions", ["employee_id", "position_id"], :name => "employee_id", :unique => true

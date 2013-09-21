@@ -59,23 +59,23 @@ ActiveRecord::Schema.define(:version => 20130916154453) do
   add_index "departments", ["name"], :name => "index_departments_on_name", :unique => true
 
   create_table "employees", :force => true do |t|
-    t.string  "first_name",           :limit => 20,  :null => false
-    t.string  "second_name",          :limit => 20,  :null => false
-    t.string  "patronymic",           :limit => 20,  :null => false
-    t.string  "passport",             :limit => 10,  :null => false
-    t.string  "registration_address", :limit => 100, :null => false
-    t.date    "accepted_date",                       :null => false
-    t.integer "position_id",                         :null => false
+    t.string "first_name",           :limit => 20,  :null => false
+    t.string "second_name",          :limit => 20,  :null => false
+    t.string "patronymic",           :limit => 20,  :null => false
+    t.string "passport",             :limit => 10,  :null => false
+    t.string "registration_address", :limit => 100, :null => false
+    t.date   "accepted_date",                       :null => false
   end
 
   add_index "employees", ["first_name", "second_name", "patronymic"], :name => "first_name", :unique => true
   add_index "employees", ["passport"], :name => "index_employees_on_passport", :unique => true
 
   create_table "employees_positions", :force => true do |t|
-    t.integer "employee_id",                          :null => false
-    t.integer "position_id",                          :null => false
-    t.float   "rate",                :default => 1.0, :null => false
-    t.date    "rate_pos_start_date",                  :null => false
+    t.integer "employee_id",                           :null => false
+    t.integer "position_id",                           :null => false
+    t.float   "rate",                :default => 1.0,  :null => false
+    t.date    "rate_pos_start_date",                   :null => false
+    t.boolean "is_main",             :default => true, :null => false
   end
 
   add_index "employees_positions", ["employee_id", "position_id"], :name => "employee_id", :unique => true
