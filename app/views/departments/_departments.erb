@@ -11,8 +11,21 @@
         <ul class="departments">
             <%= render  partial: 'departments', locals: {:departments => department.departments} %>
             <%= render  partial: 'departments/positions', locals: {:positions => department.positions} %>
-            <% if can?(:manage, :departments) %><li class = "department_new"><%= link_to '[Добавить отдел]', new_department_path(params: {department: department}) %></li><% end %>
-            <% if can?(:manage, :positions) %><li class = "position_new"><%= link_to '[Добавить должность]', new_position_path(params: {department: department}) %></li><% end %>
+            <% if can?(:manage, :departments) %>
+            	<li class = "department_new">
+            		<%= link_to '[Добавить отдел]', new_department_path(params: {
+            			association: 'department',
+            			department_id: department.id,
+						parent_scaffold: 'departments'            			
+        			}) %>
+        		</li>
+    		<% end %>
+    		
+            <% if can?(:manage, :positions) %>
+            	<li class = "position_new">
+            		<%= link_to '[Добавить должность]', new_position_path(params: {department: department}) %>
+        		</li
+    		><% end %>
         </ul>
 
     </li>

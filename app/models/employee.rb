@@ -2,7 +2,6 @@ class Employee < ActiveRecord::Base
   has_many :employees_positions
   has_many :premia
   has_one :dayoff_mask, dependent: :destroy, foreign_key: :id
-  belongs_to :position, foreign_key: :position_id, class_name: "EmployeesPosition"
   has_many :employees_visits
 
   attr_accessible(
@@ -22,7 +21,6 @@ class Employee < ActiveRecord::Base
       :passport,
       :registration_address,
       :accepted_date,
-      :position_id,
       presence: true
   )
 

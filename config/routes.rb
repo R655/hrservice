@@ -6,39 +6,41 @@ Hrservice::Application.routes.draw do
   resources :employees do as_routes end
   resources :dayoff_masks do as_routes end
   resources :positions do as_routes end
-    
-  # departments
-  
-    
-    resources :departments do
-      as_routes 
-      resources :positions do
+  resources :departments do
+    as_routes 
+    resources :positions do
+      as_routes
+      resources :employees_positions do
         as_routes
-        resources :employees_positions do
+        resources :employees do
           as_routes
-          resources :employees do
-            as_routes
-          end
         end
       end
-      collection do
-        get 'tree'  
-      end
-      member do
-        get 'details'
-      end 
-
     end
-      
+    collection do
+      get 'tree'  
+    end
+    member do
+      get 'details'
+    end 
+  end  
   resources :sick_leaves do as_routes end
   resources :premia do as_routes end
   resources :accrual_types do as_routes end
   resources :aids do as_routes end
   resources :vacations do as_routes end
-  resources :employees_visits do as_routes end
-  root :to => "home#index"
+  resources :employees_visits do 
+    as_routes
+    collection do
+      post 'submit_table' => 'employees_visits#submit_table', as: :submit_table
+      get 'select_table' => 'employees_visits#select_table', as: :select_table
+      get 'table' => 'employees_visits#table', as: :table
+    end 
+  end
+  
+  root :to => "departments#tree"
+  
   devise_for :users
-  get "home/index"
   match "/users/my_sign_out" => "devise/sessions#destroy", as: :my_user_out
 
   # The priority is based upon order of creation:

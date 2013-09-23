@@ -1,5 +1,12 @@
 class DepartmentsController < ApplicationController
   active_scaffold :"department" do |conf|
+    conf.columns = [
+      :name,
+      #:get_employees_recursive,
+      :department
+    ]
+    conf.columns[:department].form_ui = :select
+    #conf.columns[:get_employees_recursive].calculate = :sum
   end
   
   # GET /departments

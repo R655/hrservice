@@ -1,8 +1,9 @@
 <h1>Отделы</h1>
-    <div style="padding: 12px">
-        <ul class="root_departments"><%= render  partial: 'departments', locals: {:departments => @departments.select{|d| not d.department}} %>
-          <li class = "department_new"><%= link_to '[Добавить отдел]', new_department_path %></li>
-        </ul>
-    </div>
+<div style="padding: 12px">
+    <ul class="root_departments">
+   		<%= render  partial: 'departments', locals: {:departments => @departments.select{|d| not d.department}} %>
+    	<li class = "department_new"><%= link_to '[Добавить отдел]', new_department_path %></li>
+    </ul>
+</div>
 
 

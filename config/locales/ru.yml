@@ -77,6 +77,13 @@ ru:
       accrual_type:
       aid:
       dayoff_mask:
+        monday: Понедельник
+        tuesday: Вторник
+        thursday: Среда
+        wednesday: Четверг
+        friday: Пятница
+        saturday: Суббота
+        sunday: Воскресенье
       department:
         name: "Название"
         department: "Родительский отдел"
@@ -90,15 +97,16 @@ ru:
         accepted_date: Дата поступления
         registration_address: Адрес регистрации
         dayoff_mask: Выходные
-        position: Основная должность
+        position: Должность сотрудника
         premia: Назначенные премии
         passport: "Номер пасспорта"
-        employees_positions: Совмещение должностей
+        employees_positions: Должность
       employees_position:
         rate: "Ставка"
         rate_pos_start_date: "Начало работы с текущей ставкой"
         employee: "Сотрудник"
         position: "Должность"
+        is_main: Основная
       employees_prev_position:
       employees_visit:
       holiday:
@@ -114,3 +122,12 @@ ru:
         employee: "Сотрудник"
       user:
       vacation:
+        
+  date:
+
+    formats:
+      default: "%d-%m-%Y"
+      short: "%d-%m-%y"
+  time:
+    formats:
+      default: "%d.%m.%Y %I:%M %p"

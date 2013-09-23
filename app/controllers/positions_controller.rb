@@ -1,5 +1,11 @@
 class PositionsController < ApplicationController
   active_scaffold :"position" do |conf|
+    conf.columns = [
+      :name,
+      :salary,
+      :department
+    ]
+    conf.columns[:department].form_ui = :select
   end
 end
 

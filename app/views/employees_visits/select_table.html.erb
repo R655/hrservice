@@ -1,0 +1,18 @@
+
+<%= form_tag(
+	'/employees_visits/table', 
+	method: "get") do %>
+	
+    От:	
+    <input name = 'start_date' class = 'select_date'><br>
+    
+    До:
+    <input name = 'end_date' class = 'select_date'><br>
+    
+  	Отдел: 
+  	<%= select_tag :department_id1, options_from_collection_for_select(Department.all, :id, :name) %><br>
+  	<%= select_tag :department_id, options_for_select([['<Все отделы>', nil]]+Department.all.collect{|l|  [l.name, l.id] }) %><br>
+  	
+  	<%= submit_tag("Вывести табель") %>
+  
+<% end %>

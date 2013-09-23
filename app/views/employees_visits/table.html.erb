@@ -1,0 +1,30 @@
+<%= form_tag(
+	'/employees_visits/submit_table', 
+	method: "post") do %>
+	<input type='hidden' name = 'start_date' value = '<%= @start_date %>'>
+	<input type='hidden' name = 'end_date' value = '<%= @start_date %>'>
+	<input type='hidden' name = 'department_id'  value = '<%= params[:department_id] %>'>
+<table class = "employees_visits_table">
+<tr>
+	<th> Сотрудник </th>
+	<% @start_date.to_date.upto(@end_date.to_date) do |d| %>
+	<th><%= d.day %></th>
+	<% end %>
+</tr>
+<% @employees.each do |e|%>
+<tr>
+	<td> <%= e.name %></td>
+	<% @start_date.to_date.upto(@end_date.to_date) do |d| %>
+		<% employees_visit = EmployeesVisit.new( employee_id: e.id, date: d); 
+		   employees_visit_json = employees_visit.to_json; 
+		   if @evs[e.id] and @evs[e.id][d] %>
+			<td><input name = 'ev[]'  type = 'checkbox' checked = "true" value='<%= employees_visit_json  %>'></td>
+		<% else %>
+			<td><input name = 'ev[]'  type = 'checkbox' value='<%= employees_visit_json  %>'></td>
+	  	<% end %>
+  	<% end %>
+</tr>
+<% end %>
+</table>
+<%= submit_tag("Сохранить") %>
+<% end %>
