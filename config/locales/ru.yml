@@ -155,7 +155,10 @@ ru:
         admin: Админ
         tableman: Табельщик
       vacation:
-
+        employee: Сотрудник
+        start_date: Дата начала
+        end_date: Дата окончания
+      
   time:
     formats:
       default: "%d.%m.%Y %I:%M %p"
