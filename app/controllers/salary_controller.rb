@@ -1,9 +1,5 @@
-class EmployeesVisitsController < ApplicationController
-  active_scaffold :"employees_visit" do |conf|
-    conf.columns[:employee].form_ui = :select
-  end
-  
-  def select_table
+class SalaryController < ApplicationController
+ def select_table
     @start_date  = Date.today - 15 
     @end_date = @start_date.to_date + 30
     respond_to do |format|
@@ -48,33 +44,4 @@ class EmployeesVisitsController < ApplicationController
     end 
   end
 
-  def submit_table
-    # TODO: Лимит на POST не позволяется передать весь табель
-    notice = "";
-    alert = "";
-    evs = params[:ev]
-    @start_date = params[:start_date]
-    @end_date =  params[:end_date]
-    if params[:employees_ids]
-      EmployeesVisit.where(
-        'date >= ? AND date <= ? AND employee_id in (?)',
-        @start_date.to_date, @end_date.to_date, params[:employees_ids]).destroy_all
-    else
-      alert  << "cannot delete old records \n"
-    end
-    
-    evs.each do |ev|
-      new_ev = EmployeesVisit.new(JSON.parse(ev)) 
-      if(new_ev.save)
-        notice << ev << " created succesfully \n"
-      else
-        alert << ev << " cannot be created \n"
-      end
-    end
-          
-    respond_to do |format|
-      format.html {  redirect_to :back, notice: notice, alert: alert }                    
-    end
-  end
-  
 end

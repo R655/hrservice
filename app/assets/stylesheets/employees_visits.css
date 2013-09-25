@@ -1,2 +1,5 @@
-body {
+table.employees_visits_table {
+	border: #666666;
+	border-width: thick;
+	
 }

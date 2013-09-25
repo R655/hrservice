@@ -1,5 +1,13 @@
 Hrservice::Application.routes.draw do
 
+
+
+  get "salary/select_table"
+
+  get "salary/table"
+  
+  devise_for :users
+
   # match "/departments_details/new/:department_id" => "departments_details#new", as: :new_in_department
   resources :employees_prev_positions do as_routes end
   resources :employees_positions do as_routes end
@@ -37,11 +45,11 @@ Hrservice::Application.routes.draw do
       get 'table' => 'employees_visits#table', as: :table
     end 
   end
+  resources :holidays do as_routes end
+  resources :users do as_routes end
   
   root :to => "departments#tree"
   
-  devise_for :users
-  match "/users/my_sign_out" => "devise/sessions#destroy", as: :my_user_out
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

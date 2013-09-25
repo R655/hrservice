@@ -15,10 +15,11 @@
 <div id="authorize_menu" >
   <% if user_signed_in? %>
 	Авторизован как <%= current_user.email %>
-    <%= link_to "[Выход]", my_user_out_path %>
-  <% end %>
+    <%= link_to '[Выход]', destroy_user_session_path, :method => :delete %>
+  <% else %>
     <%= link_to "[Регистрация]", new_user_registration_path %>
     <%= link_to "[Вход]", new_user_session_path %>
+  <% end %>
   
 </div><br>
 
@@ -35,8 +36,9 @@
   <%= link_to 'Социальная помощь', aids_path %><br>
   <%= link_to 'Типы начислений', accrual_types_path %><br>
   <%= link_to 'Назначить отпуск', vacations_path %><br>
-  <%= link_to 'ПосещенияЫ', employees_visits_path %><br> 
-  <%= link_to 'Табель посещений', select_table_employees_visits_path %>
+  <%= link_to 'Посещения (CRUD)', employees_visits_path %><br> 
+  <%= link_to 'Табель посещений', select_table_employees_visits_path %><br>
+  <%= link_to 'Праздники', holidays_path %>
 </menu>
 
 

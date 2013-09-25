@@ -75,7 +75,15 @@ ru:
       vacation: "Отпуск"
     attributes:
       accrual_type:
+        name: Название
+        start_month: Номер месяца первого начисления в году (1 - январь)
+        months_period: Промежуток между каждым начислением (месяцы)        
       aid:
+        name: "Описание"
+        salary_factor: "Множитель ЗП"
+        salary_add: "Добавка к ЗП с учётом множителя"
+        accrual_type: "Тип начисления"
+        employee: "Сотрудник"
       dayoff_mask:
         monday: Понедельник
         tuesday: Вторник
@@ -108,8 +116,24 @@ ru:
         position: "Должность"
         is_main: Основная
       employees_prev_position:
+        department_name: Название отдела
+        end_date: Дата окончания
+        start_date: Дата начала
+        position_name: Название должности
+        rate: Ставка
+        salary: ЗП
+        employee: Сотрудник
+      sick_leave:
+        end_date: Дата окончания
+        start_date: Дата начала
+        salary_factor: "Множитель ЗП (0.0 < x <= 1.0)"
+        employee: "Сотрудник"
       employees_visit:
+        date: Дата
+        employee: Сотрудник
       holiday:
+        name: Название
+        date: Дата
       position:
         name: "Название"
         salary: "Зарплата за месяц"
@@ -119,15 +143,19 @@ ru:
         salary_factor: "Множитель ЗП"
         salary_add: "Добавка к ЗП с учётом множителя"
         accrual_type: "Тип начисления"
-        employee: "Сотрудник"
+        employee: "Назначить сотруднику"
+        start_month: Дата начала
+        end_month: Дата окончания
+        department: Назначить отделу
       user:
+        password: Пароль
+        email: Email
+        password_confirmation: Подтверждение пароля
+        hrmanager: HR-менеджер
+        admin: Админ
+        tableman: Табельщик
       vacation:
-        
-  date:
 
-    formats:
-      default: "%d-%m-%Y"
-      short: "%d-%m-%y"
   time:
     formats:
       default: "%d.%m.%Y %I:%M %p"

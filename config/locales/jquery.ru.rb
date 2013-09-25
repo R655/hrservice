@@ -34,8 +34,9 @@
       date_format: 'dd-mm-yy',
       firstDay: 1,
       formats: {
-        default: "%d-%m-%Y",
-        short: "%d-%m-%y"
+        default: "%d-%m-%y",
+        short: "%d-%m-%y",
+        long: "%d-%m-%y"
       } 
     }
   }

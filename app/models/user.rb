@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
            'tableman']
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :admin, :hrmanager, :tableman
+              
   
   def roles
     ROLES.collect do |role|

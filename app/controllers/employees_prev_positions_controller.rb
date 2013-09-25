@@ -1,5 +1,15 @@
 class EmployeesPrevPositionsController < ApplicationController
-    active_scaffold :"employees_prev_position" do |conf|
+  active_scaffold :"employees_prev_position" do |conf|
+    conf.columns = [
+      :position_name,
+      :department_name,
+      :salary,
+      :rate,
+      :start_date,
+      :end_date,
+      :employee
+    ]    
+    conf.columns[:employee].form_ui = :select
   end
 end
 

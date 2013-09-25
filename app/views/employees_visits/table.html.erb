@@ -2,8 +2,11 @@
 	'/employees_visits/submit_table', 
 	method: "post") do %>
 	<input type='hidden' name = 'start_date' value = '<%= @start_date %>'>
-	<input type='hidden' name = 'end_date' value = '<%= @start_date %>'>
-	<input type='hidden' name = 'department_id'  value = '<%= params[:department_id] %>'>
+	<input type='hidden' name = 'end_date' value = '<%= @end_date %>'>
+	<% @employees.collect{|e| e.id}.each do |eid|%>
+		<input type='hidden' name = 'employees_ids[]'  value = '<%= eid %>'>
+	<% end %>
+	
 <table class = "employees_visits_table">
 <tr>
 	<th> Сотрудник </th>
@@ -14,14 +17,14 @@
 <% @employees.each do |e|%>
 <tr>
 	<td> <%= e.name %></td>
-	<% @start_date.to_date.upto(@end_date.to_date) do |d| %>
-		<% employees_visit = EmployeesVisit.new( employee_id: e.id, date: d); 
+	<% @start_date.to_date.upto(@end_date.to_date) do |d| 
+		   employees_visit = EmployeesVisit.new( employee_id: e.id, date: d); 
 		   employees_visit_json = employees_visit.to_json; 
 		   if @evs[e.id] and @evs[e.id][d] %>
-			<td><input name = 'ev[]'  type = 'checkbox' checked = "true" value='<%= employees_visit_json  %>'></td>
-		<% else %>
-			<td><input name = 'ev[]'  type = 'checkbox' value='<%= employees_visit_json  %>'></td>
-	  	<% end %>
+				<td><input name = 'ev[]'  type = 'checkbox' value='<%= employees_visit_json  %>' checked/></td>
+			<% else %>
+				<td><input name = 'ev[]'  type = 'checkbox' value='<%= employees_visit_json  %>'/></td>
+	  		<% end %>
   	<% end %>
 </tr>
 <% end %>
