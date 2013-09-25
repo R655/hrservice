@@ -13,5 +13,6 @@ class EmployeesController  < ApplicationController
       :add_positions
     ]
     conf.columns[:accepted_date].options = {:format => :short}
+    conf.columns[:add_positions].show_blank_record = false
   end
 end

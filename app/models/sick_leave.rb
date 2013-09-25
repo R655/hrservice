@@ -10,7 +10,10 @@ class SickLeave < ActiveRecord::Base
   )
 
   validates :salary_factor, numericality: {
-      in: 0..1
+      in: 0.0..1.0
   }
 
+  def name
+   start_date
+  end
 end

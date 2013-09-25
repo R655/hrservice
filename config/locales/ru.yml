@@ -64,7 +64,7 @@ ru:
       dayoff_mask: "Выходные"
       department: "Отдел"
       employee: "Сотрудник"
-      employees_position: "Должность сотрудника"
+      employees_position: "Совмещение должностей"
       employees_prev_position: "Предыдущая должность сотрудника"
       employees_visit: "Посещения"
       holiday: "Праздник"
