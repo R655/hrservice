@@ -27,16 +27,10 @@ class SalaryController < ApplicationController
       @end_date = @start_date.to_date + 30
     end
      
-    @employees_visits = EmployeesVisit.where(
-      'date >= ? AND date <= ? AND employee_id in (?)',
-       @start_date.to_date, @end_date.to_date, @employees.collect{|e| e.id}) 
-    @evs = {};
-    @employees_visits.each do |ev|
-      if(!@evs[ev.employee.id])
-        @evs[ev.employee.id] = {}
-      end
-      @evs[ev.employee.id][ev.date] = true 
-    end
+    @employee_salary = {}
+    #@employees.each do |emp|
+    #  @employee_salary[emp.id] = emp.calculate_salary @start_date @end_date   
+    #end
                   
     respond_to do |format|
       format.html { render 'table.html.erb'}

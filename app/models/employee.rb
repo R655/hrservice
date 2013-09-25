@@ -1,7 +1,12 @@
 class Employee < ActiveRecord::Base
   has_many :employees_positions
+  
+  has_many :add_positions, class_name: EmployeesPosition, conditions: {:is_main => false}
+  has_one :main_position, class_name: EmployeesPosition, conditions: {:is_main => true}
+  
   has_many :premia
   has_one :dayoff_mask, dependent: :destroy, foreign_key: :id
+  has_one :user
   has_many :employees_visits
 
   attr_accessible(
@@ -10,8 +15,7 @@ class Employee < ActiveRecord::Base
       :second_name,
       :passport,
       :registration_address,
-      :accepted_date,
-      :position_id
+      :accepted_date
   )
 
   validates(
@@ -21,6 +25,7 @@ class Employee < ActiveRecord::Base
       :passport,
       :registration_address,
       :accepted_date,
+      :main_position,
       presence: true
   )
 

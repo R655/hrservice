@@ -109,6 +109,8 @@ ru:
         premia: Назначенные премии
         passport: "Номер пасспорта"
         employees_positions: Должность
+        main_position: Основная должность
+        add_positions: Совмещение
       employees_position:
         rate: "Ставка"
         rate_pos_start_date: "Начало работы с текущей ставкой"
@@ -149,11 +151,14 @@ ru:
         department: Назначить отделу
       user:
         password: Пароль
+        employee: Привязанный к аккаунту сотрудник
         email: Email
         password_confirmation: Подтверждение пароля
+        accountant: Бухгалтер
         hrmanager: HR-менеджер
         admin: Админ
         tableman: Табельщик
+        created_at: Дата регистрацияя
       vacation:
         employee: Сотрудник
         start_date: Дата начала
@@ -162,3 +167,5 @@ ru:
   time:
     formats:
       default: "%d.%m.%Y %I:%M %p"
+    pm: PM
+    am: AM

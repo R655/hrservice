@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin, :hrmanager, :tableman
+  
+  belongs_to :employee
               
   
   def roles
@@ -21,6 +23,10 @@ class User < ActiveRecord::Base
         nil
       end
     end
+  end
+  
+  def name
+    email  
   end
   
   def admin?

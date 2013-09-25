@@ -1,6 +1,6 @@
 class EmployeesPosition < ActiveRecord::Base
-  belongs_to :employee
-  belongs_to :position
+  belongs_to :employee#, dependent: :delete
+  belongs_to :position#, dependent: :restrict
 
 
   attr_accessible :employee_id, :position_id, :rate, :rate_pos_start_date

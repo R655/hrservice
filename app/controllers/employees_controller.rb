@@ -9,7 +9,8 @@ class EmployeesController  < ApplicationController
       :registration_address,
       :dayoff_mask,
       :passport,
-      :employees_positions
+      :main_position,
+      :add_positions
     ]
     conf.columns[:accepted_date].options = {:format => :short}
   end
