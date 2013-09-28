@@ -98,6 +98,7 @@ ru:
         departments: "Дочерние отделы"
         positions: "Должности"
         premia: "Назначенные отделу премии"
+        tree: "Дерево отделов"
       employee:
         first_name: Имя
         second_name: Фамилия

@@ -5,7 +5,13 @@ class PositionsController < ApplicationController
       :salary,
       :department
     ]
+    conf.nested.add_link(:employees)
     conf.columns[:department].form_ui = :select
+    conf.columns[:salary].options = {
+      min: 1000.00,
+      max: 1000000.00,
+      step: 0.01
+    }
   end
 end
 

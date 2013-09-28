@@ -28,7 +28,7 @@ class InitialDb < ActiveRecord::Migration
       t.boolean "wednesday", :default => false, :null => false
       t.boolean "thursday",  :default => false, :null => false
       t.boolean "friday",    :default => false, :null => false
-      t.boolean "saturday",  :default => true,  :null => false
+      t.boolean "saturday",                     :null => false
       t.boolean "sunday",    :default => true,  :null => false
     end
   

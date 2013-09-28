@@ -11,6 +11,7 @@ class EmployeesPosition < ActiveRecord::Base
       in: 0.1..2.0
   }
 
+  delegate :department, to: :position
   def name
     if rate != 1.0
       position.name + ' (' + rate.to_s + ')'

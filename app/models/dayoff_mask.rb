@@ -1,6 +1,19 @@
 class DayoffMask < ActiveRecord::Base
-  attr_accessible :friday, :monday, :saturday, :sunday, :thursday, :tuesday, :wednesday
-  belongs_to :employee, dependent: :destroy, foreign_key: :id
+  attr_accessible :friday, :monday, :saturday, :sunday, :thursday, :tuesday, :wednesday, :id
+  belongs_to :employee, foreign_key: :id#, dependent: :destroy
 
 
+  def name
+    nm = ''
+    i = 0
+    Date::DAYNAMES.each do |d|
+      if i > 0 
+         nm += (send(d.downcase))?'D':'W'
+      end
+      i += 1
+    end
+    d = Date::DAYNAMES[0]
+    nm += (send(d.downcase))?'D':'W'
+    return nm
+  end
 end

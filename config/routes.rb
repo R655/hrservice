@@ -6,6 +6,8 @@ Hrservice::Application.routes.draw do
 
   get "salary/table"
   
+  get "employees/hello"
+  
   devise_for :users
 
   # match "/departments_details/new/:department_id" => "departments_details#new", as: :new_in_department

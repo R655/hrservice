@@ -7,7 +7,10 @@ class DayoffMasksController < ApplicationController
         :wednesday,
         :friday,
         :saturday,
-        :sunday  
+        :sunday,
+        :employee
     ]
+    conf.columns[:employee].form_ui = :select
+    #conf.columns[:saturday].form_ui = :select
   end
 end
