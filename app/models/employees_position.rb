@@ -10,7 +10,15 @@ class EmployeesPosition < ActiveRecord::Base
   validates :rate, numericality: {
       in: 0.1..2.0
   }
-
+  
+  def start_date
+    rate_pos_start_date
+  end
+  
+  def end_date
+    Date::current
+  end
+  
   delegate :department, to: :position
   def name
     if rate != 1.0
