@@ -1,0 +1,28 @@
+
+table.employees_visits_table
+{
+	border-collapse:collapse;
+	/*border: 1px solid black;*/
+	
+	td, th
+	{
+		border: 1px solid #999999;		
+	}
+	td
+	{
+		padding:5px;
+	}
+	tr
+ 	{
+		background-color: #e6f2ff;
+	}
+	tr.even
+	{
+		background-color: white;
+	}
+	th
+	{
+		background-color: black;
+		color: white;
+	}
+}

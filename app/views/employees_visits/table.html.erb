@@ -15,7 +15,7 @@
 	<% end %>
 </tr>
 <% @employees.each do |e|%>
-<tr>
+<tr class = <%= cycle('even','')%>>
 	<td> <%= e.name %></td>
 	<% @start_date.to_date.upto(@end_date.to_date) do |d| 
 		   employees_visit = EmployeesVisit.new( employee_id: e.id, date: d); 

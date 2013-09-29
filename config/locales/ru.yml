@@ -73,6 +73,7 @@ ru:
       sick_leave: "Больничный"
       user: "Пользователь"
       vacation: "Отпуск"
+      ev: "Отработано"
     attributes:
       accrual_type:
         name: Название
@@ -112,6 +113,8 @@ ru:
         employees_positions: Должность
         main_position: Основная должность
         add_positions: Совмещение
+        aids: Социальная помощь
+        vacations: Отпуск
       employees_position:
         rate: "Ставка"
         rate_pos_start_date: "Начало работы с текущей ставкой"
@@ -146,10 +149,10 @@ ru:
         salary_factor: "Множитель ЗП"
         salary_add: "Добавка к ЗП с учётом множителя"
         accrual_type: "Тип начисления"
-        employee: "Назначить сотруднику"
-        start_month: Дата начала
-        end_month: Дата окончания
-        department: Назначить отделу
+        employee: "Назначено сотруднику"
+        start_date: Дата начала
+        end_date: Дата окончания
+        department: Назначено отделу
       user:
         password: Пароль
         employee: Привязанный к аккаунту сотрудник

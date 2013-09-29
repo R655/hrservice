@@ -29,7 +29,13 @@ class EmployeesPrevPosition < ActiveRecord::Base
       greater_than: 0.01
   }
 
-
+  def name
+    if rate != 1.0
+      position_name + ' (' + rate.to_s + ')'
+    else
+      position_name
+    end
+  end
 
 
 end

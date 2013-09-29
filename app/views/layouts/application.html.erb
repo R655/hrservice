@@ -26,19 +26,28 @@
 <div id = "columns">
 
 <menu>
-  <%= link_to 'История должностей', employees_prev_positions_path  %><br>
-  <%= link_to 'Текущие должности', employees_positions_path  %><br>
-  <%= link_to 'Сотрудники', employees_path  %><br>
-  <%= link_to 'Должности', positions_path %><br>
-  <%= link_to 'Отделы', departments_path %><br>
-  <%= link_to 'Больничные', sick_leaves_path %><br>
-  <%= link_to 'Премии', premia_path %><br>
-  <%= link_to 'Социальная помощь', aids_path %><br>
-  <%= link_to 'Типы начислений', accrual_types_path %><br>
-  <%= link_to 'Назначить отпуск', vacations_path %><br>
-  <%= link_to 'Посещения (CRUD)', employees_visits_path %><br> 
-  <%= link_to 'Табель посещений', select_table_employees_visits_path %><br>
-  <%= link_to 'Праздники', holidays_path %>
+	<ul>
+		HR:
+		<% if can?(:read, :employees) %><li><%= link_to 'Сотрудники', employees_path  %></li><% end %>
+		<% if can?(:read, :positions) %><li><%= link_to 'Должности', positions_path %></li><% end %>
+		<% if can?(:read, :departments) %><li><%= link_to 'Отделы', departments_path %></li><% end %>
+  		<% if can?(:read, :employees_positions) %><li><%= link_to 'Текущие должности', employees_positions_path  %></li><% end %>
+  		<% if can?(:read, :employees_prev_positions) %><li><%= link_to 'История должностей', employees_prev_positions_path  %></li><% end %>
+  		<% if can?(:read, :users) %><li><%= link_to 'Пользователи', users_path  %></li><% end %>
+	</ul>
+	<ul>
+		Начисления:
+		<li><%= link_to 'Премии', premia_path %></li>
+		<li><%= link_to 'Социальная помощь', aids_path %></li>
+		<li><%= link_to 'Типы начислений', accrual_types_path %></li>
+	</ul>
+  	<ul>
+  		<li><%= link_to 'Табель посещений', select_table_employees_visits_path %></li>
+  		<li><%= link_to 'Посещения (CRUD)', employees_visits_path %></li> 
+  		<li><%= link_to 'Отпуск', vacations_path %></li>
+  		<li><%= link_to 'Больничный', sick_leaves_path %></li>	
+  		<li><%= link_to 'Праздники', holidays_path %></li>
+  	</ul>
 </menu>
 
 

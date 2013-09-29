@@ -1,3 +1,49 @@
 // Place all the styles related to the Salary controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+table.salary
+{
+  border-collapse:collapse;
+  /*border: 1px solid black;*/
+  
+  td, th
+  {
+    border: 1px solid #999999;    
+  }
+  td
+  {
+    padding:5px;
+  }
+  tr.even
+  {
+    background-color: #e6f2ff;
+  }
+  tr
+  {
+    background-color: white;
+  }
+  th
+  {
+    background-color: black;
+    color: white;
+  }
+  .position
+  { 
+    li
+    {
+         
+    }
+    ol
+    {
+      
+    }
+    
+    
+    .details
+    {
+      /*display: none*/
+    }
+  }
+}

@@ -1,6 +1,6 @@
 class DayoffMask < ActiveRecord::Base
   attr_accessible :friday, :monday, :saturday, :sunday, :thursday, :tuesday, :wednesday, :id
-  belongs_to :employee, foreign_key: :id#, dependent: :destroy
+  belongs_to :employee, foreign_key: :id
   
   def is_dayoff day
     send((Date::DAYNAMES[day.wday]).downcase)

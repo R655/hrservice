@@ -1,5 +1,17 @@
 class PremiaController < ApplicationController
   active_scaffold :"premium" do |conf|
+    conf.columns = [
+      :name,
+      :start_date,
+      :end_date,
+      :accrual_type,
+      :department,
+      :employee,
+      :salary_factor,
+      :salary_add
+    ]
+    
+    
     conf.columns[:accrual_type].form_ui = :select 
     conf.columns[:employee].form_ui = :select
     conf.columns[:department].form_ui = :select

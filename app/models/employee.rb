@@ -1,15 +1,17 @@
 class Employee < ActiveRecord::Base
-  has_many :employees_positions
+  has_many :employees_positions, dependent: :destroy
   
   has_many :add_positions, class_name: EmployeesPosition, conditions: {:is_main => false}
   has_one :main_position, class_name: EmployeesPosition, conditions: {:is_main => true}
   delegate :department, to: :main_position
   
-  has_many :premia
+  has_many :premia, dependent: :destroy
   has_one :dayoff_mask, class_name: DayoffMask, foreign_key: :id, dependent: :destroy
   has_one :user
-  has_many :employees_visits
-  has_many :aids
+  has_many :employees_visits, dependent: :destroy
+  has_many :aids, dependent: :destroy
+  has_many :sick_leaves, dependent: :destroy
+  has_many :vacations, dependent: :destroy
 
   attr_accessible(
       :first_name,
@@ -74,7 +76,12 @@ class Employee < ActiveRecord::Base
   def isect_objs_count  obj_a, obj_b
     a, b = isect obj_a.start_date, obj_a.end_date, obj_b.start_date, obj_b.end_date
     count = b.to_date - a.to_date + 1
-    count *= obj_b.salary_factor
+    if count > 0
+      count *= obj_b.salary_factor
+      count
+    else
+      0
+    end
   end
   
   def isect_obj_array_count obj, array
@@ -100,20 +107,11 @@ class Employee < ActiveRecord::Base
     opremia
   end
   
-  def main_pos_on date
-     date_range_finder_str = 'start_date <= '+date+' AND end_date => '+date+' AND employee_id = '+self.id
-     main_positions = EmployeesPrevPosition.where(date_range_finder_str+' AND ismain = true')
-     if main_position.start_date.to_date <= date 
-       main_positions += main_position
-     end
-     return main_positions 
-  end
-  
   def get_paydays prem, start_date, end_date
     paydays = []
-    payday = Date.new(start_date.to_date.year, start_date.to_date.month, Constants.where(name: 'payday'))
-    while payday < end_date.to_date
-      if payday > start_date.to_date and (day.month - prem.start_month) % prem.months_period == 0
+    payday = Date.new(start_date.to_date.year, start_date.to_date.month, Constants::payday)
+    while payday <= end_date.to_date
+      if payday > start_date.to_date and (payday.month - prem.start_month + 1) % prem.months_period == 0
         paydays << payday
       end
       payday += 1.month
@@ -154,33 +152,33 @@ class Employee < ActiveRecord::Base
     summ = 0.00
     all_positions.each do |pos|
       pos_details = {}
-      summ += (pos_details[:ev] = isect_obj_array_count pos, employees_visits)[:summ]
+      pos_summ = 0
+      pos_summ += (pos_details[:ev] = isect_obj_array_count pos, employees_visits)[:summ]
       if pos.is_main
-        pos_details = {}
-        pos_summ = 0
-        pos_summ += (pos_details[:vacations] = isect_obj_array_count pos, vacations)[:summ]
-        pos_summ += (pos_details[:sick_leaves] = isect_obj_array_count pos, sick_leaves)[:summ]
-        pos_summ += (pos_details[:holidays] = isect_obj_array_count pos, holidays)[:summ]
+        pos_summ += (pos_details[:vacation] = isect_obj_array_count pos, vacations)[:summ]
+        pos_summ += (pos_details[:sick_leave] = isect_obj_array_count pos, sick_leaves)[:summ]
+        pos_summ += (pos_details[:holiday] = isect_obj_array_count pos, holidays)[:summ]
                 
         count = 0
         pos.start_date.to_date.upto(pos.end_date.to_date) do |day| 
           count += 1 if dayoff_mask.is_dayoff(day)
         end
-        pos_summ +=(pos_details[:dayoffs] = {count: count, summ: count*pos.salary/30.00})[:summ]
+        pos_summ +=(pos_details[:dayoff_mask] = {count: count, summ: count*pos.salary/30.00})[:summ]
         
         
-        pos_details[:premia] = {}
+        pos_details[:premium] = {}
         all_premia.each do |prem|
-          pos_summ += (pos_details[:premia][prem] = acc_isects pos, prem)[:summ]
+          pos_summ += (pos_details[:premium][prem] = acc_isects pos, prem)[:summ]
         end
         
-        pos_details[:aids] = {}
+        pos_details[:aid] = {}
         aids.each do |prem|
-          pos_summ += (pos_details[:premia][prem] = acc_isects pos, prem)[:summ]
-        end   
-        details[pos] = {summ: pos_summ, details: pos_details}
-        summ += pos_summ
+          pos_summ += (pos_details[:aid][prem] = acc_isects pos, prem)[:summ]
+        end       
       end
+      pos_details[:summ] = pos_summ
+      details[pos] = pos_details 
+      summ += pos_summ
     end
     return {summ: summ, details: details}
   end

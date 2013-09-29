@@ -1,11 +1,11 @@
 class Department < ActiveRecord::Base
 
   
-  belongs_to :department
-  has_many :departments
+  belongs_to :department#, dependent: :restrict
+  has_many :departments, dependent: :restrict
   
-  has_many :positions
-  has_many :premia # если включить то круд перестаёт работать
+  has_many :positions, dependent: :restrict
+  has_many :premia
 
 
   attr_accessible :name, :department_id

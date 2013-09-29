@@ -49,7 +49,7 @@ class EmployeesVisitsController < ApplicationController
   end
 
   def submit_table
-    # TODO: Лимит на POST не позволяется передать весь табель
+    
     notice = "";
     alert = "";
     evs = params[:ev]

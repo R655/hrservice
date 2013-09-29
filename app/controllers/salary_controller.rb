@@ -34,7 +34,7 @@ class SalaryController < ApplicationController
     end
                   
     respond_to do |format|
-      format.html { render 'table.html.erb'}
+      format.html { render 'table.haml'}
       format.json { render json: @departments }
     end 
   end

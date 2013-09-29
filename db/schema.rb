@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130929124436) do
+ActiveRecord::Schema.define(:version => 20130929172846) do
 
   create_table "accrual_types", :force => true do |t|
     t.string  "name",          :limit => 20,                :null => false
@@ -124,8 +124,8 @@ ActiveRecord::Schema.define(:version => 20130929124436) do
     t.integer "accrual_type_id",                                                                :null => false
     t.decimal "salary_add",                     :precision => 10, :scale => 2, :default => 0.0, :null => false
     t.float   "salary_factor",                                                 :default => 0.0, :null => false
-    t.date    "start_month",                                                                    :null => false
-    t.date    "end_month"
+    t.date    "start_date",                                                                     :null => false
+    t.date    "end_date"
   end
 
   add_index "premia", ["accrual_type_id"], :name => "prem_acctypeFK"

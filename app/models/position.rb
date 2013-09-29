@@ -3,7 +3,7 @@ class Position < ActiveRecord::Base
 
   attr_accessible :name, :department_id, :salary
   
-  has_many :employees_positions
+  has_many :employees_positions, dependent: :restrict
   has_many :employees, through: :employees_positions
   
   def main_employees

@@ -11,6 +11,16 @@ class EmployeesPosition < ActiveRecord::Base
       in: 0.1..2.0
   }
   
+  def name
+    if rate != 1.0
+      position.name + ' (' + rate.to_s + ')'
+    else
+      position.name
+    end
+  end
+  
+  
+  
   def start_date= date
     rate_pos_start_date = date
   end
@@ -29,24 +39,14 @@ class EmployeesPosition < ActiveRecord::Base
   
   def end_date
     if @tmp_end_date == nil
-      Date::current
+      "31-12-3000"
     else
       @tmp_end_date
     end
   end
   
   delegate :department, to: :position
-  def name
-    if rate != 1.0
-      position.name + ' (' + rate.to_s + ')'
-    else
-      position.name
-    end
-  end
-  
-  def initialize
-   super
-   @tmp_end_date = Date::current
-  end
+
+
 
 end
