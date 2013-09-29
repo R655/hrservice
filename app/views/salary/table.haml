@@ -1,0 +1,16 @@
+%table.employees_visits_table
+	%tr
+	%th Сотрудник
+		%th Сумма
+		%th Подробности
+	-@employees.each do |e|%>
+	%tr
+		%td = e.name
+		%td = @employees_salary[e.id][:summ]
+		%td
+			@employees_salary[e.id][:details].each do |pos, details| %>
+		 	.position Должность: =pos.name
+		 	.pos_summ Сумма: =details[:summ]
+			.ev Отработано: =details[:details][:ev][:count]
+
+
