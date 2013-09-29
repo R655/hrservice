@@ -5,16 +5,16 @@ class DepartmentsController < ApplicationController
       #:get_employees_recursive,
       :department
     ]
-    conf.nested.add_scoped_link(:get_employees_recursive)
+    #conf.nested.add_scoped_link(:get_employees_recursive)
     conf.nested.add_link(:positions)
     conf.action_links.add 'tree', :label => I18n.translate('activerecord.attributes.department.tree'), :image => {:name => '/images/icons/application_side_tree.png', :size => '16x16'}
     conf.columns[:department].form_ui = :select
-    conf.show.columns =[
-      :get_employees_recursive,
-      :name,
+   # conf.show.columns =[
+     # :get_employees_recursive,
+     # :name,
       #:get_employees_recursive,
-      :department
-    ]
+     # :department
+    #]
     #conf.columns[:get_employees_recursive].calculate = :sum
   end
   

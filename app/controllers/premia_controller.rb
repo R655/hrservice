@@ -27,4 +27,8 @@ class PremiaController < ApplicationController
     }
   end
  
+  def do_new
+    super
+    @record.start_date = Date::current    
+  end 
 end

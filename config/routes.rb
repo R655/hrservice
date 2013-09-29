@@ -49,7 +49,7 @@ Hrservice::Application.routes.draw do
   resources :holidays do as_routes end
   resources :users do as_routes end
   
-  root :to => "departments#tree"
+  root :to => "home#index"
   
 
   # The priority is based upon order of creation:

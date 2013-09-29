@@ -15,4 +15,9 @@ class EmployeesPositionsController < ApplicationController
     }
     # TODO: set rate options on ostalnoi
   end
+  
+  def do_new
+    super
+    @record.rate_pos_start_date = Date::current    
+  end 
 end

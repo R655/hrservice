@@ -29,7 +29,7 @@ class EmployeesController  < ApplicationController
   def do_new
     super
     @record.dayoff_mask = DayoffMask.new
-        
+    @record.accepted_date = Date::current    
   end  
   
 end

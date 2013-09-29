@@ -11,7 +11,11 @@ class SickLeavesController < ApplicationController
       min: 0.01,
       max: 1.00,
       step: 0.01
-    }
-   
+    } 
   end
+  
+  def do_new
+    super
+    @record.start_date = Date::current    
+  end 
 end

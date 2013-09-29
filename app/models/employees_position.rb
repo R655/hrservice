@@ -19,7 +19,26 @@ class EmployeesPosition < ActiveRecord::Base
     end
   end
   
-  
+  def modify_history_after_del
+    if !employee_id
+      return nil
+    end
+    
+    evs = EmployeesVisit.where('date >= ? AND employee_id = ?', rate_pos_start_date, employee_id).all
+    if evs.count > 0
+      prev_pos = EmployeesPrevPosition.new(
+          employee_id: employee_id,
+          department_name: position.department.name,
+          position_name: position.name,
+          salary: position.salary,
+          rate: rate,
+          start_date: rate_pos_start_date,
+          end_date: Date::current,
+          is_main: is_main
+        )
+      prev_pos.save
+    end
+  end
   
   def start_date= date
     rate_pos_start_date = date

@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
 
   ROLES = ['hrmanager' ,
            'admin' ,
-           'tableman']
+           'tableman',
+           'accountant']
+          
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :admin, :hrmanager, :tableman

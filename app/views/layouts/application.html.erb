@@ -28,25 +28,30 @@
 <menu>
 	<ul>
 		HR:
-		<% if can?(:read, :employees) %><li><%= link_to 'Сотрудники', employees_path  %></li><% end %>
-		<% if can?(:read, :positions) %><li><%= link_to 'Должности', positions_path %></li><% end %>
-		<% if can?(:read, :departments) %><li><%= link_to 'Отделы', departments_path %></li><% end %>
-  		<% if can?(:read, :employees_positions) %><li><%= link_to 'Текущие должности', employees_positions_path  %></li><% end %>
-  		<% if can?(:read, :employees_prev_positions) %><li><%= link_to 'История должностей', employees_prev_positions_path  %></li><% end %>
-  		<% if can?(:read, :users) %><li><%= link_to 'Пользователи', users_path  %></li><% end %>
+		
+		<% if can?(:read, Employee) %><li><%= link_to 'Сотрудники', employees_path  %></li><% end %>
+		<% if can?(:read, Position) %><li><%= link_to 'Должности', positions_path %></li><% end %>
+		<% if can?(:read, Department) %><li><%= link_to 'Отделы', departments_path %></li><% end %>
+  		<% if can?(:read, EmployeesPosition) %><li><%= link_to 'Текущие должности', employees_positions_path  %></li><% end %>
+  		<% if can?(:read, EmployeesPrevPosition) %><li><%= link_to 'История должностей', employees_prev_positions_path  %></li><% end %>
+  		<% if can?(:read, User) %><li><%= link_to 'Пользователи', users_path  %></li><% end %>
 	</ul>
 	<ul>
 		Начисления:
-		<li><%= link_to 'Премии', premia_path %></li>
-		<li><%= link_to 'Социальная помощь', aids_path %></li>
-		<li><%= link_to 'Типы начислений', accrual_types_path %></li>
+		
+		<% if can?(:read, Premium) %><li><%= link_to 'Премии', premia_path %></li><% end %>
+		<% if can?(:read, Aid) %><li><%= link_to 'Социальная помощь', aids_path %></li><% end %>
+		<% if can?(:read, AccrualType) %><li><%= link_to 'Типы начислений', accrual_types_path %></li><% end %>
 	</ul>
+	
   	<ul>
-  		<li><%= link_to 'Табель посещений', select_table_employees_visits_path %></li>
-  		<li><%= link_to 'Посещения (CRUD)', employees_visits_path %></li> 
-  		<li><%= link_to 'Отпуск', vacations_path %></li>
-  		<li><%= link_to 'Больничный', sick_leaves_path %></li>	
-  		<li><%= link_to 'Праздники', holidays_path %></li>
+  		Табель:
+  		
+  		<% if can?(:read, EmployeesVisit) %><li><%= link_to 'Табель посещений', select_table_employees_visits_path %></li><% end %>
+  		<% if can?(:read, EmployeesVisit) %><li><%= link_to 'Посещения (CRUD)', employees_visits_path %></li> <% end %>
+  		<% if can?(:read, Vacation) %><li><%= link_to 'Отпуск', vacations_path %></li><% end %>
+  		<% if can?(:read, SickLeave) %><li><%= link_to 'Больничный', sick_leaves_path %></li>	<% end %>
+  		<% if can?(:read, Holiday) %><li><%= link_to 'Праздники', holidays_path %></li><% end %>
   	</ul>
 </menu>
 

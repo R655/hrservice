@@ -3,6 +3,11 @@ class EmployeesVisitsController < ApplicationController
     conf.columns[:employee].form_ui = :select
   end
   
+  def do_new
+    super
+    @record.date = Date::current    
+  end 
+  
   def select_table
     @start_date  = Date.today - 15 
     @end_date = @start_date.to_date + 30

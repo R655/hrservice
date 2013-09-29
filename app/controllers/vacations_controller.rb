@@ -8,5 +8,9 @@ class VacationsController < ApplicationController
     conf.columns[:employee].form_ui = :select
   end
   
-
+  def do_new
+    super
+    @record.start_date = Date::current    
+  end
+   
 end
