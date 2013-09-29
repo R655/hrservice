@@ -10,7 +10,7 @@ class Employee < ActiveRecord::Base
   has_one :user
   has_many :employees_visits
   has_many :aids
-  
+
   attr_accessible(
       :first_name,
       :patronymic,
@@ -35,7 +35,7 @@ class Employee < ActiveRecord::Base
       :passport,
       format: {with: /\d{10}/}
   )
-  
+
   def date_max date_a, date_b
     if(date_a.to_date > date_b.to_date)
       date_a
@@ -73,19 +73,16 @@ class Employee < ActiveRecord::Base
   
   def isect_objs_count  obj_a, obj_b
     a, b = isect obj_a.start_date, obj_a.end_date, obj_b.start_date, obj_b.end_date
-    count = b.to_date - a.to_date
+    count = b.to_date - a.to_date + 1
     count *= obj_b.salary_factor
   end
   
   def isect_obj_array_count obj, array
-    wat = {}
     count = 0
     array.each do |lol|
       count += isect_objs_count obj, lol
     end
-    wat[:count] = count
-    wat[:summ] = obj.salary*count/30
-    wat
+    {count: count, summ: obj.salary*count/30}
   end 
   
   def name
@@ -94,7 +91,7 @@ class Employee < ActiveRecord::Base
   
   def all_premia
     # всем
-    opremia = Premium.where(employee_id: nil, department_id: nil) 
+    opremia = Premium.where(employee_id: nil, department_id: nil)
     # всему отделу, можно делегировать отделу с кондишеном eid = null
     opremia += Premium.where(employee_id: nil, department_id: department.id)
     # только этому сотруднику 
@@ -132,29 +129,29 @@ class Employee < ActiveRecord::Base
   
   def calculate_salary start_date, end_date
    
-    date_range_finder_str = 'start_date <= '+end_date+' AND end_date >= '+start_date+' AND employee_id = '+self.id.to_s 
+    date_range_finder_str = 'start_date <= ? AND end_date >= ? AND employee_id = ?'
    
-    all_positions = isect_all EmployeesPrevPosition.where(date_range_finder_str)+employees_positions,
+    all_positions = isect_all EmployeesPrevPosition.where(date_range_finder_str, end_date.to_date, start_date.to_date, self.id).all+employees_positions,
                     start_date,
                     end_date
        
     employees_visits = EmployeesVisit.where(
       'date >= ? AND date <= ? AND employee_id = ?',
-       start_date.to_date, end_date.to_date, self.id) # main + adds
+       start_date.to_date, end_date.to_date, self.id).all # main + adds
 
        
     holidays = Holiday.where(
       'date >= ? AND date <= ?',
-       start_date.to_date, end_date.to_date) # only main
+       start_date.to_date, end_date.to_date).all # only main
        
-    sick_leaves = isect_all SickLeave.where(date_range_finder_str), start_date, end_date  # only main
+    sick_leaves = isect_all SickLeave.where(date_range_finder_str, end_date.to_date, start_date.to_date, self.id).all, start_date, end_date  # only main
        
-    vacations = isect_all Vacation.where(date_range_finder_str), start_date, end_date  # only main
+    vacations = isect_all Vacation.where(date_range_finder_str, end_date.to_date, start_date.to_date, self.id).all, start_date, end_date  # only main
     
     
     
     wat = {}
-    summ = 0
+    summ = 0.00
     all_positions.each do |pos|
       wat[pos] = {}
       summ += (wat[pos][:ev] = isect_obj_array_count pos, employees_visits)[:summ]

@@ -27,10 +27,11 @@ class SalaryController < ApplicationController
       @end_date = @start_date.to_date + 30
     end
      
-    @employee_salary = {}
-    #@employees.each do |emp|
-    #  @employee_salary[emp.id] = emp.calculate_salary @start_date @end_date   
-    #end
+    @employees_salary = {}
+    
+    @employees.each do |emp|
+      @employees_salary[emp.id] = emp.calculate_salary @start_date, @end_date   
+    end
                   
     respond_to do |format|
       format.html { render 'table.html.erb'}
