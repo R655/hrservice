@@ -1,7 +1,7 @@
 class Aid < ActiveRecord::Base
   attr_accessible :salary_factor, :salary_add, :employee_id, :name, :accrual_type_id
   belongs_to :accrual_type # :dependent => :restrict # круд перестаёт работать изза депендента
-  belongs_to :employee, dependent: :destroy
+  belongs_to :employee
   validates :salary_factor, :salary_add, :employee_id, :name, :accrual_type_id, presence: true
   validates :name, uniqueness: true
   validates :name, length: {
