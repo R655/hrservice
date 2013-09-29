@@ -7,7 +7,8 @@ class EmployeesPrevPosition < ActiveRecord::Base
       :rate,
       :start_date,
       :end_date,
-      :employee_id
+      :employee_id,
+      :is_main
   )
 
   validates(

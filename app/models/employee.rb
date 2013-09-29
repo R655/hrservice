@@ -150,36 +150,39 @@ class Employee < ActiveRecord::Base
     
     
     
-    wat = {}
+    details = {}
     summ = 0.00
     all_positions.each do |pos|
-      wat[pos] = {}
-      summ += (wat[pos][:ev] = isect_obj_array_count pos, employees_visits)[:summ]
+      pos_details = {}
+      summ += (pos_details[:ev] = isect_obj_array_count pos, employees_visits)[:summ]
       if pos.is_main
-        summ += (wat[pos][:vacations] = isect_obj_array_count pos, vacations)[:summ]
-        summ += (wat[pos][:sick_leaves] = isect_obj_array_count pos, sick_leaves)[:summ]
-        summ += (wat[pos][:holidays] = isect_obj_array_count pos, holidays)[:summ]
+        pos_details = {}
+        pos_summ = 0
+        pos_summ += (pos_details[:vacations] = isect_obj_array_count pos, vacations)[:summ]
+        pos_summ += (pos_details[:sick_leaves] = isect_obj_array_count pos, sick_leaves)[:summ]
+        pos_summ += (pos_details[:holidays] = isect_obj_array_count pos, holidays)[:summ]
                 
-        wat[pos][:dayoffs] = {}
         count = 0
         pos.start_date.to_date.upto(pos.end_date.to_date) do |day| 
           count += 1 if dayoff_mask.is_dayoff(day)
         end
-        summ +=(wat[pos][:dayoffs] = {count: count, summ: count*pos.salary})[:summ]
+        pos_summ +=(pos_details[:dayoffs] = {count: count, summ: count*pos.salary/30.00})[:summ]
         
         
-        wat[pos][:premia] = {}
+        pos_details[:premia] = {}
         all_premia.each do |prem|
-          summ += (wat[pos][:premia][prem] = acc_isects pos, prem)[:summ]
+          pos_summ += (pos_details[:premia][prem] = acc_isects pos, prem)[:summ]
         end
         
-        wat[pos][:aids] = {}
+        pos_details[:aids] = {}
         aids.each do |prem|
-          summ += (wat[pos][:premia][prem] = acc_isects pos, prem)[:summ]
+          pos_summ += (pos_details[:premia][prem] = acc_isects pos, prem)[:summ]
         end   
+        details[pos] = {summ: pos_summ, details: pos_details}
+        summ += pos_summ
       end
     end
-    return {summ: summ, details: wat}
+    return {summ: summ, details: details}
   end
     
 end

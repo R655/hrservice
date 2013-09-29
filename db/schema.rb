@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925030035) do
+ActiveRecord::Schema.define(:version => 20130929124436) do
 
   create_table "accrual_types", :force => true do |t|
     t.string  "name",          :limit => 20,                :null => false
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20130925030035) do
     t.float   "rate",                                                         :null => false
     t.date    "start_date",                                                   :null => false
     t.date    "end_date"
+    t.boolean "is_main"
   end
 
   add_index "employees_prev_positions", ["employee_id"], :name => "employees_historyFK"

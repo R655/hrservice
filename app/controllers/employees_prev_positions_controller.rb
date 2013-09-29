@@ -10,6 +10,11 @@ class EmployeesPrevPositionsController < ApplicationController
       :employee
     ]    
     conf.columns[:employee].form_ui = :select
+    conf.columns[:salary].options = {
+      min: 1000.00,
+      max: 1000000.00,
+      step: 0.01
+    }
     conf.columns[:rate].options = {
       min: 0.1,
       max: 1.0,
