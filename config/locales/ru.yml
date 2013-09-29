@@ -58,6 +58,65 @@ ru:
         subject: "Инструкции по разблокировке учётной записи"
         
   activerecord:
+    errors:
+      models:
+        accrual_type:
+          attributes:
+            position_id:
+              blank: Пусто
+        aid:
+          attributes:
+            position_id:
+              blank: Пусто
+        dayoff_mask:
+          attributes:
+            position_id:
+              blank: Пусто
+        department:
+          attributes:
+            position_id:
+              blank: Пусто
+        employee:
+          attributes:
+            position_id:
+              blank: Пусто
+        employees_position:
+          attributes:
+            position_id:
+              blank: Пусто
+        employees_prev_position:
+          attributes:
+            position_id:
+              blank: Пусто
+        employees_visit:
+          attributes:
+            position_id:
+              blank: Пусто
+        holiday:
+          attributes:
+            position_id:
+              blank: Пусто
+        position:
+          attributes:
+            position_id:
+              blank: Пусто
+        premium:
+          attributes:
+            position_id:
+              blank: Пусто
+        sick_leave:
+          attributes:
+            position_id:
+              blank: Пусто
+        user:
+          attributes:
+            position_id:
+              blank: Пусто
+        vacation:
+          attributes:
+            position_id:
+              blank: Пусто
+            
     models:
       accrual_type: "Тип начисления"
       aid: "Социальная помощь"

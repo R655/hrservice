@@ -10,7 +10,7 @@ class Employee < ActiveRecord::Base
   has_one :user
   has_many :employees_visits, dependent: :destroy
   has_many :aids, dependent: :destroy
-  has_many :sick_leaves, dependent: :destroy
+  has_many :sick_leaves, class_name: SickLeave, dependent: :destroy
   has_many :vacations, dependent: :destroy
 
   attr_accessible(
@@ -30,9 +30,12 @@ class Employee < ActiveRecord::Base
       :registration_address,
       :accepted_date,
       :dayoff_mask,
+      :main_position,
       presence: true
   )
 
+  validates :passport, uniqueness: true
+  
   validates(
       :passport,
       format: {with: /\d{10}/}

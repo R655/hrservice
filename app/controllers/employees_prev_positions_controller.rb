@@ -7,7 +7,8 @@ class EmployeesPrevPositionsController < ApplicationController
       :rate,
       :start_date,
       :end_date,
-      :employee
+      :employee,
+      :is_main
     ]    
     conf.columns[:employee].form_ui = :select
     conf.columns[:salary].options = {
