@@ -3,4 +3,17 @@ class Holiday < ActiveRecord::Base
   validates :date, :name, :presence => true
   validates :name, uniqueness: true
   validates :date, uniqueness: true
+  
+  def start_date
+    date
+  end
+
+  def end_date
+    date
+  end
+  
+  def salary_factor
+    1.0
+  end
+  
 end

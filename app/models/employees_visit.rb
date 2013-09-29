@@ -14,7 +14,18 @@ class EmployeesVisit < ActiveRecord::Base
     :employee_id,
     uniqueness:{ scope: :date }
   )
+  
+  def start_date
+    date
+  end
 
+  def end_date
+    date
+  end
+  
+  def salary_factor
+    1.0
+  end
 
 
 end

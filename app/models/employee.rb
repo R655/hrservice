@@ -9,7 +9,8 @@ class Employee < ActiveRecord::Base
   has_one :dayoff_mask, class_name: DayoffMask, foreign_key: :id, dependent: :destroy
   has_one :user
   has_many :employees_visits
-
+  has_many :aids
+  
   attr_accessible(
       :first_name,
       :patronymic,
@@ -35,7 +36,7 @@ class Employee < ActiveRecord::Base
       format: {with: /\d{10}/}
   )
   
-  def self.date_max date_a, date_b
+  def date_max date_a, date_b
     if(date_a.to_date > date_b.to_date)
       date_a
     else
@@ -43,7 +44,7 @@ class Employee < ActiveRecord::Base
     end
   end
   
-  def self.date_min date_a, date_b
+  def date_min date_a, date_b
     if(date_a.to_date < date_b.to_date)
       date_a
     else
@@ -51,81 +52,137 @@ class Employee < ActiveRecord::Base
     end
   end
 
-  def self.isect start_date_a, end_date_a, start_date_b, end_date_b
+  def isect start_date_a, end_date_a, start_date_b, end_date_b
     return date_max(start_date_a, start_date_b), date_min(end_date_a, end_date_b)
   end
   
-  def self.isect object, start_date, end_date
-    object.each do |o|
+  def isect_all array, start_date, end_date
+    array.each do |o|
       o.start_date, o.end_date = isect o.start_date, o.end_date, start_date, end_date
     end
-    return object
+    return array
   end
+  
+  def isect_obj obj, start_date, end_date
+    isect obj.start_date, obj.end_date, start_date, end_date
+  end
+  
+  def isect_objs obj_a, obj_b
+    isect obj_a.start_date, obj_a.end_date, obj_b.start_date, obj_b.end_date
+  end
+  
+  def isect_objs_count  obj_a, obj_b
+    a, b = isect obj_a.start_date, obj_a.end_date, obj_b.start_date, obj_b.end_date
+    count = b.to_date - a.to_date
+    count *= obj_b.salary_factor
+  end
+  
+  def isect_obj_array_count obj, array
+    wat = {}
+    count = 0
+    array.each do |lol|
+      count += isect_objs_count obj, lol
+    end
+    wat[:count] = count
+    wat[:summ] = obj.salary*count/30
+    wat
+  end 
   
   def name
     return second_name+' '+first_name[0]+". " +patronymic[0]+"."
   end
   
+  def all_premia
+    # всем
+    opremia = Premium.where(employee_id: nil, department_id: nil) 
+    # всему отделу, можно делегировать отделу с кондишеном eid = null
+    opremia += Premium.where(employee_id: nil, department_id: department.id)
+    # только этому сотруднику 
+    opremia += Premium.where(employee_id: id)
+    
+    opremia
+  end
+  
+  def main_pos_on date
+     date_range_finder_str = 'start_date <= '+date+' AND end_date => '+date+' AND employee_id = '+self.id
+     main_positions = EmployeesPrevPosition.where(date_range_finder_str+' AND ismain = true')
+     if main_position.start_date.to_date <= date 
+       main_positions += main_position
+     end
+     return main_positions 
+  end
+  
+  def get_paydays prem, start_date, end_date
+    paydays = []
+    payday = Date.new(start_date.to_date.year, start_date.to_date.month, Constants.where(name: 'payday'))
+    while payday < end_date.to_date
+      if payday > start_date.to_date and (day.month - prem.start_month) % prem.months_period == 0
+        paydays << payday
+      end
+      payday += 1.month
+    end  
+    paydays
+  end
+  
+  def acc_isects pos, prem
+    count = (get_paydays prem, pos.start_date, pos.end_date).size
+    summ = (pos.salary*prem.salary_factor + prem.salary_add)*count
+    return {count: count, summ: summ}
+  end 
+  
   def calculate_salary start_date, end_date
    
-    date_range_finder_str = 'start_date <= '+end_date+' AND end_date => '+start_date+' AND employee_id = '+self.id 
+    date_range_finder_str = 'start_date <= '+end_date+' AND end_date >= '+start_date+' AND employee_id = '+self.id.to_s 
    
-    add_positions = isect EmployeesPrevPosition.where(date_range_finder_str+' AND ismain = false')+add_positions,
+    all_positions = isect_all EmployeesPrevPosition.where(date_range_finder_str)+employees_positions,
                     start_date,
                     end_date
-    
-    main_positions = isect EmployeesPrevPosition.where(date_range_finder_str+' AND ismain = true') + main_positions, 
-                     start_date, 
-                     end_date
-    
-   
+       
     employees_visits = EmployeesVisit.where(
       'date >= ? AND date <= ? AND employee_id = ?',
        start_date.to_date, end_date.to_date, self.id) # main + adds
+
        
     holidays = Holiday.where(
       'date >= ? AND date <= ?',
        start_date.to_date, end_date.to_date) # only main
        
-    
+    sick_leaves = isect_all SickLeave.where(date_range_finder_str), start_date, end_date  # only main
        
-    sick_leaves = isect SickLeave.where(date_range_finder_str), start_date, end_date  # only main
-       
-    vacations = isect Vacation.where(date_range_finder_str), start_date, end_date  # only main
+    vacations = isect_all Vacation.where(date_range_finder_str), start_date, end_date  # only main
     
-    # intersect date ranges
-    # (start_m..end_m).to_a & (d1..d2).to_a
+    
+    
+    wat = {}
+    summ = 0
+    all_positions.each do |pos|
+      wat[pos] = {}
+      summ += (wat[pos][:ev] = isect_obj_array_count pos, employees_visits)[:summ]
+      if pos.is_main
+        summ += (wat[pos][:vacations] = isect_obj_array_count pos, vacations)[:summ]
+        summ += (wat[pos][:sick_leaves] = isect_obj_array_count pos, sick_leaves)[:summ]
+        summ += (wat[pos][:holidays] = isect_obj_array_count pos, holidays)[:summ]
+                
+        wat[pos][:dayoffs] = {}
+        count = 0
+        pos.start_date.to_date.upto(pos.end_date.to_date) do |day| 
+          count += 1 if dayoff_mask.is_dayoff(day)
+        end
+        summ +=(wat[pos][:dayoffs] = {count: count, summ: count*pos.salary})[:summ]
         
-    dayoff_count = 0
-    start_date.to_date.upto(end_date.to_date) do |day| 
-      if  dayoff_mask.send((Date::DAYNAMES[day.wday]).downcase)
-        dayoff_count += 1
+        
+        wat[pos][:premia] = {}
+        all_premia.each do |prem|
+          summ += (wat[pos][:premia][prem] = acc_isects pos, prem)[:summ]
+        end
+        
+        wat[pos][:aids] = {}
+        aids.each do |prem|
+          summ += (wat[pos][:premia][prem] = acc_isects pos, prem)[:summ]
+        end   
       end
-        
-        #sick_leaves. each
-        # if day in sick_leave
-          #  add day
-          
-        #holidays
-        #holidays = Holiday.where(date: day)
-        #if day.day == Constants.where(name: 'payday')
-          # всем
-         # premia = Premium.where(employee_id: null, department_id: null) 
-          # всему отделу, можно делегировать отделу с кондишеном eid = null
-         # premia = Premium.where(employee_id: null, department_id: department.id)
-          # только этому сотруднику 
-          #premia + Premium.where(employee_id: id)
-          #aids
-          #premia   
-        #end
     end
-    
-    for_pay_count =
-          ev_count + # отработано
-           summ(vac_count*vac_coef) + # за отпуск 
-           summ(sick_count*sick_coef) # за больничные
-    vsego = 30 - dayoff_count - holidays_count    
-    zp = for_pay_count/vsego*salary
+    return {summ: summ, details: wat}
   end
     
 end

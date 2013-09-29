@@ -16,4 +16,5 @@ class SickLeave < ActiveRecord::Base
   def name
    start_date
   end
+  
 end

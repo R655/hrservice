@@ -2,7 +2,9 @@ class Premium < ActiveRecord::Base
   belongs_to :employee
   belongs_to :department
   belongs_to :accrual_type
-
+  delegate :start_month, to: :accrual_type
+  delegate :months_period, to: :accrual_type
+  
   attr_accessible(
       :name,
       :salary_factor,
@@ -33,4 +35,6 @@ class Premium < ActiveRecord::Base
   validates :salary_add, numericality: {
       greater_than: 0.01
   }
+  
+  
 end
