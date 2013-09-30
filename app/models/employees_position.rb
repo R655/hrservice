@@ -20,7 +20,6 @@ class EmployeesPosition < ActiveRecord::Base
   end
       
   after_destroy :modify_history_after_del
-  before_validation :modify_history_before_up
   after_update :modify_history_after_up
     
   def modify_history_before_up
@@ -31,7 +30,7 @@ class EmployeesPosition < ActiveRecord::Base
     if !employee_id
       return nil
     end
-    
+    @old_start_date = @changed_attributes['rate_pos_start_date'] or rate_pos_start_date;
     if rate_pos_start_date.to_date < @old_start_date.to_date
       return nil 
     end
@@ -43,10 +42,10 @@ class EmployeesPosition < ActiveRecord::Base
           department_name: position.department.name,
           position_name: position.name,
           salary: position.salary,
-          rate: rate,
+          rate: (@changed_attributes['rate'] or rate),
           start_date: @old_start_date.to_date,
           end_date: rate_pos_start_date.to_date,
-          is_main: is_main
+          is_main: (@changed_attributes['is_main'] or is_main)
         )
       prev_pos.save
     end

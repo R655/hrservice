@@ -78,7 +78,7 @@ class EmployeesVisitsController < ApplicationController
     end
           
     respond_to do |format|
-      format.html {  redirect_to :back, notice: notice, alert: alert }                    
+      format.html {  redirect_to :back, alert: alert }
     end
   end
   

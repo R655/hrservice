@@ -51,24 +51,11 @@ footer{
 }
 
 
-#columns{
-    padding-top: 12px;
-    padding-bottom: 12px;
-    margin: 0 auto;
-    width: 980px;
-    position: relative;
-}
-
-#up_button{
-    border:#666666;
-    border-style: solid;
-    position: absolute;
-    left: 20px;
-    bottom: 20px;
-}
-
 #authorize_menu{
     float:right
 }
 
+.menu_part
+{
 
+}

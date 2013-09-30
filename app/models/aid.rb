@@ -12,7 +12,7 @@ class Aid < ActiveRecord::Base
       in: 0..1
   }
   validates :salary_add, numericality: {
-      greater_than: 0.01
+      greater_than_or_equal_to: 0.00
   }
   delegate :start_month, to: :accrual_type
   delegate :months_period, to: :accrual_type
