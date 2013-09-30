@@ -213,6 +213,7 @@ ru:
         end_date: Дата окончания
         department: Назначено отделу
       user:
+        current_password: Текущий пароль
         password: Пароль
         employee: Привязанный к аккаунту сотрудник
         email: Email

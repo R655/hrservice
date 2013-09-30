@@ -16,6 +16,7 @@
   <% if user_signed_in? %>
 	Авторизован как <%= current_user.email %>
     <%= link_to '[Выход]', destroy_user_session_path, :method => :delete %>
+    <%= link_to "[Сменить пароль]", edit_user_registration_path %>
   <% else %>
     <%= link_to "[Регистрация]", new_user_registration_path %>
     <%= link_to "[Вход]", new_user_session_path %>
