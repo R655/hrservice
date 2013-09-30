@@ -18,6 +18,39 @@ class EmployeesPosition < ActiveRecord::Base
       position.name
     end
   end
+      
+  after_destroy :modify_history_after_del
+  before_validation :modify_history_before_up
+  after_update :modify_history_after_up
+    
+  def modify_history_before_up
+    @old_start_date = rate_pos_start_date
+  end  
+  
+  def modify_history_after_up
+    if !employee_id
+      return nil
+    end
+    
+    if rate_pos_start_date.to_date < @old_start_date.to_date
+      return nil 
+    end
+    
+    evs = EmployeesVisit.where('date >= ? AND date <= ? AND employee_id = ?', @old_start_date.to_date, rate_pos_start_date.to_date, employee_id).all
+    if evs.count > 0
+      prev_pos = EmployeesPrevPosition.new(
+          employee_id: employee_id,
+          department_name: position.department.name,
+          position_name: position.name,
+          salary: position.salary,
+          rate: rate,
+          start_date: @old_start_date.to_date,
+          end_date: rate_pos_start_date.to_date,
+          is_main: is_main
+        )
+      prev_pos.save
+    end
+  end
   
   def modify_history_after_del
     if !employee_id

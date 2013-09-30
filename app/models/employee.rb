@@ -155,16 +155,18 @@ class Employee < ActiveRecord::Base
     summ = 0.00
     all_positions.each do |pos|
       pos_details = {}
-      pos_summ = 0
+      pos_summ = 0.00
       pos_summ += (pos_details[:ev] = isect_obj_array_count pos, employees_visits)[:summ]
-      if pos.is_main
+      if pos.is_main == true
         pos_summ += (pos_details[:vacation] = isect_obj_array_count pos, vacations)[:summ]
         pos_summ += (pos_details[:sick_leave] = isect_obj_array_count pos, sick_leaves)[:summ]
         pos_summ += (pos_details[:holiday] = isect_obj_array_count pos, holidays)[:summ]
                 
         count = 0
-        pos.start_date.to_date.upto(pos.end_date.to_date) do |day| 
-          count += 1 if dayoff_mask.is_dayoff(day)
+        if dayoff_mask 
+          pos.start_date.to_date.upto(pos.end_date.to_date) do |day| 
+            count += 1 if dayoff_mask.is_dayoff(day)
+          end
         end
         pos_summ +=(pos_details[:dayoff_mask] = {count: count, summ: count*pos.salary/30.00})[:summ]
         

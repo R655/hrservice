@@ -1,11 +1,7 @@
 class Ability
   include CanCan::Ability
 
-  def initialize (user)
-
-
-    #can :read, :employees_positions
-    
+  def initialize (user)  
     #can :manage, :all
     if user
       if user.admin?
@@ -13,7 +9,8 @@ class Ability
         can :manage, Employee
         can :manage, Constants
         can :manage, Holiday
-      elsif user.hrmanager?        
+      end
+      if user.hrmanager?        
         can :manage, AccrualType
         can :manage, Aid
         can :manage, DayoffMask
@@ -26,13 +23,15 @@ class Ability
         can :manage, Premium
         can :manage, SickLeave
         can :manage, Vacation
-      elsif user.tableman
+      end
+      if user.tableman
         can :manage, EmployeesVisit
         can :manage, DayoffMask
         can :read, Holiday
         can :read, Vacation
         can :read, SickLeave
-      elsif user.accountant
+      end
+      if user.accountant
         can :manage, AccrualType
         can :manage, Position
         can :manage, Premium

@@ -39,6 +39,7 @@
 	<ul>
 		Начисления:
 		
+		<% if can?(:manage, :salary) %><li><%= link_to 'Расчёт ЗП', salary_select_table_path %></li><% end %>
 		<% if can?(:read, Premium) %><li><%= link_to 'Премии', premia_path %></li><% end %>
 		<% if can?(:read, Aid) %><li><%= link_to 'Социальная помощь', aids_path %></li><% end %>
 		<% if can?(:read, AccrualType) %><li><%= link_to 'Типы начислений', accrual_types_path %></li><% end %>

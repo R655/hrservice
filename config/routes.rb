@@ -2,9 +2,9 @@ Hrservice::Application.routes.draw do
 
 
 
-  get "salary/select_table"
+  get "salary/select_table", as: :salary_select_table
 
-  get "salary/table"
+  get "salary/table", as: :salary_table
   
    
   devise_for :users
