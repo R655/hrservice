@@ -5,13 +5,13 @@ class Ability
     #can :manage, :all
     if user
       if user.admin?
+        can :manage, AccrualType
         can :manage, User
         can :manage, Employee
         can :manage, Constants
         can :manage, Holiday
       end
       if user.hrmanager?        
-        can :manage, AccrualType
         can :manage, Aid
         can :manage, DayoffMask
         can :manage, Department
