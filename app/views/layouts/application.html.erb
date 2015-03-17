@@ -44,8 +44,10 @@
       <td>
   <div class = "menu_part">
 	<ul>
+    <% if can?(:read, :salary) || can?(:read, Premium) ||  can?(:read, Aid) || can?(:read, AccrualType) %>
 		Начисления:<br>
-		
+		<% end %>
+
 		<% if can?(:manage, :salary) %><li><%= link_to 'Расчёт ЗП', salary_select_table_path %></li><% end %>
 		<% if can?(:read, Premium) %><li><%= link_to 'Премии', premia_path %></li><% end %>
 		<% if can?(:read, Aid) %><li><%= link_to 'Социальная помощь', aids_path %></li><% end %>
@@ -56,8 +58,10 @@
       <td>
 <div class = "menu_part">
   	<ul>
-  		Табель: <br>
-  		
+  		<% if can?(:read, EmployeesVisit) || can?(:read, Vacation)||  can?(:read, SickLeave)  || can?(:read, Holiday) %>
+      Табель: <br>
+  		<% end %>
+
   		<% if can?(:read, EmployeesVisit) %><li><%= link_to 'Табель посещений', select_table_employees_visits_path %></li><% end %>
   		<% if can?(:read, EmployeesVisit) %><li><%= link_to 'Посещения (CRUD)', employees_visits_path %></li> <% end %>
   		<% if can?(:read, Vacation) %><li><%= link_to 'Отпуск', vacations_path %></li><% end %>
